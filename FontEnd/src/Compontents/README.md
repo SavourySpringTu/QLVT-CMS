@@ -1,0 +1,2 @@
+Parking Management
+This is a simple web-based open source software written in Java and MySQL. This was specifically written for school or educational organization. You can easily install this system in your own server.
