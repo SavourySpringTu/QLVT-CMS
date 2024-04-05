@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Data
 public class ChiNhanhEntity{
     @Id
     private String MACN;
