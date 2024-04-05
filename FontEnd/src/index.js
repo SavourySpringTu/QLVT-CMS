@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'bootstrap/dist/css/bootstrap.css';
-import App from './App';
+import App from './views/App';
 import reportWebVitals from './reportWebVitals';
+import './styles/global.scss'
+<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
