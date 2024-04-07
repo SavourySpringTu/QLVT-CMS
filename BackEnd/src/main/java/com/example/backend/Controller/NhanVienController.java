@@ -1,9 +1,8 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Entity.NhanVienEntity;
-import com.example.backend.Service.NhanVienService;
+import com.example.backend.Services.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +19,12 @@ public class NhanVienController {
 
     @RequestMapping(value ="/login", method = RequestMethod.POST)
     public ResponseEntity<NhanVienEntity> login(@RequestBody NhanVienEntity nhanvien){
-        NhanVienEntity tmp = nhanVienService.login("CN01",nhanvien.getMANV(),nhanvien.getPASSWORD());
+        System.out.println(nhanvien.getMANV());
+        System.out.println(nhanvien.getMATKHAU());
+        System.out.println(nhanvien.getChiNhanhNV().getMACN());
+        NhanVienEntity tmp = nhanVienService.login(String.valueOf(nhanvien.getChiNhanhNV().getMACN()),nhanvien.getMANV(),nhanvien.getMATKHAU());
         if(tmp==null){
-            return new ResponseEntity("FAILED !", HttpStatus.OK);
+            return new ResponseEntity("Failed", HttpStatus.OK);
         }
         return new ResponseEntity(tmp, HttpStatus.OK);
     }

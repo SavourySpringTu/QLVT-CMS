@@ -1,30 +1,23 @@
 import React from "react";
-import axios from 'axios';
 import NhanVienService from "../services/NhanVienService"
-import { Axios } from "axios";
 
 
 class ListNhanVien extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            NhanVien: []
-        }
+    state = {
+        ArrNhanVien: []
     }
-    componentDidMount() {
-        axios.get('http://localhost:8086/backend/api/nhanvien/list').then((res) => {
-            this.setState({ NhanVien: res.data })
-            console.log(this.state.NhanVien)
-        })
-            .catch(function (ex) {
-                console.log('Response parsing failed. Error: ', ex);
-            });;
+    async componentDidMount() {
+        NhanVienService.getListNhanVien().then((res) => {
+            const nv = res.data
+            this.setState({ ArrNhanVien: nv })
+        }).catch(function (ex) {
+            console.log('Response parsing failed. Error: ', ex);
+        });;
     }
     render() {
         return (
             <>
-                {/* <div>
+                <div>
                     <h2 className="text-center">Book Details</h2>
                     <table className="table table-striped">
                         <thead>
@@ -36,16 +29,17 @@ class ListNhanVien extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.map(NhanVien =>
-                                    <tr key={NhanVien.MANV}>
-                                        <td>{NhanVien.HOTEN}</td>
-                                        <td>{NhanVien.CMND}</td>
+                                this.state.ArrNhanVien.map(book =>
+                                    <tr key={book.manv}>
+                                        <td>{book.manv}</td>
+                                        <td>{book.hoten}</td>
+                                        <td>{book.socmnd}</td>
                                     </tr>
                                 )
                             }
                         </tbody>
                     </table>
-                </div> */}
+                </div>
             </>
         )
     }

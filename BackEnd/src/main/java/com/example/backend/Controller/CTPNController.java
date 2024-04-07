@@ -1,7 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Entity.CTPNEntity;
-import com.example.backend.Service.CTPNService;
+import com.example.backend.Services.CTPNService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

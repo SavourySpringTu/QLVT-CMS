@@ -1,9 +1,7 @@
-import './App.scss';
-import ListNhanVien from "../components/ListNhanVien";
-import MyComponent from "./Example/MyComponent"
+import Login from "./Login"
 function App() {
   return (
-    <ListNhanVien></ListNhanVien>
+    <Login></Login>
   );
 }
 

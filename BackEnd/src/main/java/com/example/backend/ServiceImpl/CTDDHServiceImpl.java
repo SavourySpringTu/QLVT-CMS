@@ -2,11 +2,8 @@ package com.example.backend.ServiceImpl;
 
 import com.example.backend.Entity.CTDDHEntity;
 import com.example.backend.Entity.CTDDHID;
-import com.example.backend.Entity.VatTuEntity;
 import com.example.backend.Repository.CTDDHRepository;
-import com.example.backend.Repository.VatTuRepository;
-import com.example.backend.Service.CTDDHService;
-import com.example.backend.Service.VatTuService;
+import com.example.backend.Services.CTDDHService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

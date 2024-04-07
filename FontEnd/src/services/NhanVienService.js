@@ -1,11 +1,12 @@
-import axios from 'axios';
 import instance from './custom-axios';
 
-const NhanVien_URL = "nhanvien";
 
 class NhanVienService {
-    getNhanVien() {
-        return axios.get("http://localhost:8086/backend/api/nhanvien/list");
+    getListNhanVien() {
+        return instance.get('/nhanvien/list');
+    }
+    loginNhanVien(Data) {
+        return instance.post('/nhanvien/login', Data)
     }
 }
 

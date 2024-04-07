@@ -2,7 +2,7 @@ package com.example.backend.ServiceImpl;
 
 import com.example.backend.Entity.VatTuEntity;
 import com.example.backend.Repository.VatTuRepository;
-import com.example.backend.Service.VatTuService;
+import com.example.backend.Services.VatTuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

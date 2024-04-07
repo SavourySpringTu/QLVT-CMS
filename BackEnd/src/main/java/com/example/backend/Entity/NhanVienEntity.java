@@ -24,7 +24,12 @@ public class NhanVienEntity{
     private LocalDate NGAYSINH;
     private int LUONG;
     private boolean TRANGTHAI;
-    private String PASSWORD;
+    private String MATKHAU;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="MAQUYEN")
+    @JsonBackReference(value = "vaiTroNV")
+    private VaiTroEntity vaiTroNV;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="MACN")

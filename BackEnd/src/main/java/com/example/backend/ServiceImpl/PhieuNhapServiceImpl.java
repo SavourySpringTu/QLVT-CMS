@@ -2,7 +2,7 @@ package com.example.backend.ServiceImpl;
 
 import com.example.backend.Entity.PhieuNhapEntity;
 import com.example.backend.Repository.PhieuNhapRepository;
-import com.example.backend.Service.PhieuNhapService;
+import com.example.backend.Services.PhieuNhapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

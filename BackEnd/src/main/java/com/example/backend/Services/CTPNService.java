@@ -1,8 +1,6 @@
-package com.example.backend.Service;
+package com.example.backend.Services;
 
-import com.example.backend.Entity.CTDDHEntity;
 import com.example.backend.Entity.CTPNEntity;
-import com.example.backend.Entity.PhieuNhapEntity;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package com.example.backend.ServiceImpl;
 import com.example.backend.Entity.CTPNEntity;
 import com.example.backend.Entity.CTPNID;
 import com.example.backend.Repository.CTPNRepository;
-import com.example.backend.Service.CTPNService;
+import com.example.backend.Services.CTPNService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

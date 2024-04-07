@@ -2,7 +2,7 @@ package com.example.backend.ServiceImpl;
 
 import com.example.backend.Entity.NhanVienEntity;
 import com.example.backend.Repository.NhanVienRepository;
-import com.example.backend.Service.NhanVienService;
+import com.example.backend.Services.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,8 @@ public class NhanVienServiceImpl implements NhanVienService {
         if(tmp == null){
             return null;
         }else{
-            if(tmp.getChiNhanhNV().getMACN().equals(cn)==true && tmp.getPASSWORD().equals(password)==true){
+            if(tmp.getChiNhanhNV().getMACN().equals(cn)==true && tmp.getMATKHAU().equals(password)==true){
+
                 return tmp;
             }else{
                 return null;

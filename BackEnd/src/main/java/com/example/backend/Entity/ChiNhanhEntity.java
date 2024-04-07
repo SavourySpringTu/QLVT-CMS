@@ -25,10 +25,10 @@ public class ChiNhanhEntity{
 
     @OneToMany(mappedBy="chiNhanhKho",fetch = FetchType.EAGER)
     @JsonManagedReference(value = "chiNhanhKho")
+    @JsonIgnore
     private List<KhoEntity> khoList;
 
     @OneToMany(mappedBy="chiNhanhNV",fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "chiNhanhNV")
-    @JsonIgnore
+    @JsonBackReference(value = "chiNhanhNV")
     private List<NhanVienEntity> nhanVienList;
 }

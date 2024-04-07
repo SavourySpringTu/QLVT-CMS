@@ -1,7 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Entity.PhieuNhapEntity;
-import com.example.backend.Service.PhieuNhapService;
+import com.example.backend.Services.PhieuNhapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
