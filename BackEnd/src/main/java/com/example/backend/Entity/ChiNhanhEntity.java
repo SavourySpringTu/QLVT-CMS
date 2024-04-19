@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @Data
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "macn")
 public class ChiNhanhEntity{
     @Id
     private String MACN;
@@ -24,11 +25,10 @@ public class ChiNhanhEntity{
     private String SDT;
 
     @OneToMany(mappedBy="chiNhanhKho",fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "chiNhanhKho")
     @JsonIgnore
     private List<KhoEntity> khoList;
 
     @OneToMany(mappedBy="chiNhanhNV",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "chiNhanhNV")
+    @JsonIgnore
     private List<NhanVienEntity> nhanVienList;
 }

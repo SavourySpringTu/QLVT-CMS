@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mactpx")
 public class CTPXEntity implements Serializable {
     @AttributeOverrides({
             @AttributeOverride(name="my_mapx",column =@Column(name="MAPX")),
@@ -25,7 +26,5 @@ public class CTPXEntity implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="MAVT",insertable = false, updatable = false)
-    @JsonManagedReference(value = "vatTuCTPX")
-    @JsonIgnore
     private VatTuEntity vatTuCTPX;
 }

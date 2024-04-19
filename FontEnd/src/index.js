@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './views/App';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import './styles/global.scss'
+import Login from './views/Login';
+import Home from './views/Home'
+import rootReducer from './store/reducers/rootReducer';
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const reduxStore = createStore(rootReducer);
 root.render(
-  <App />
+  <Provider store={reduxStore}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/trangchu" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

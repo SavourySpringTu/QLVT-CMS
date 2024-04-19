@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mapx")
 public class PhieuXuatEntity{
     @Id
     private String MAPX;
@@ -22,11 +23,9 @@ public class PhieuXuatEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="MANV")
-    @JsonBackReference(value = "nhanVienPX")
     private NhanVienEntity nhanVienPX;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="MAKHO")
-    @JsonBackReference(value = "khoPX")
     private KhoEntity khoPX;
 }

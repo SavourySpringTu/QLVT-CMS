@@ -23,6 +23,7 @@ public class NhanVienController {
         System.out.println(nhanvien.getMATKHAU());
         System.out.println(nhanvien.getChiNhanhNV().getMACN());
         NhanVienEntity tmp = nhanVienService.login(String.valueOf(nhanvien.getChiNhanhNV().getMACN()),nhanvien.getMANV(),nhanvien.getMATKHAU());
+        System.out.println(tmp);
         if(tmp==null){
             return new ResponseEntity("Failed", HttpStatus.OK);
         }

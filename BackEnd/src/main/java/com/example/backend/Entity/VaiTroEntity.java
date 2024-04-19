@@ -1,6 +1,6 @@
 package com.example.backend.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -15,12 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Data
 @Table(name="vaitro")
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maquyen")
 public class VaiTroEntity {
     @Id
     private String MAQUYEN;
     private String TENQUYEN;
 
     @OneToMany(mappedBy="vaiTroNV",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "vaiTroNV")
+    @JsonIgnore
     private List<NhanVienEntity> nhanVienList;
 }

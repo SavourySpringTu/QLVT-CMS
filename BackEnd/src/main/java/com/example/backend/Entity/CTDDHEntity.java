@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maddn")
 public class CTDDHEntity implements Serializable{
     @AttributeOverrides({
             @AttributeOverride(name="my_mddh",column=@Column(name="MADDH")),
@@ -27,7 +28,5 @@ public class CTDDHEntity implements Serializable{
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="MAVT",insertable = false, updatable = false)
-    @JsonManagedReference(value = "vatTuCTDDH")
-    @JsonIgnore
     private VatTuEntity vatTuCTDDH;
 }

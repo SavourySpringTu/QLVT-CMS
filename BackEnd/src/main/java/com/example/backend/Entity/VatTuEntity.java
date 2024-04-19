@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mavt")
 public class VatTuEntity implements Serializable{
     @Id
     private String MAVT;
@@ -21,14 +22,11 @@ public class VatTuEntity implements Serializable{
     private int SOLUONGTON;
 
     @OneToOne(mappedBy = "vatTuCTDDH")
-    @JsonBackReference(value = "vatTuCTDDH")
     private CTDDHEntity ctddh;
 
     @OneToOne(mappedBy = "vatTuCTPN")
-    @JsonBackReference(value = "vatTuCTPN")
     private CTPNEntity ctpn;
 
     @OneToOne(mappedBy = "vatTuCTPX")
-    @JsonBackReference(value = "vatTuCTPX")
     private CTPXEntity ctpx;
 }
