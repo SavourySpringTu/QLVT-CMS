@@ -13,6 +13,7 @@
     - Axios 8.11
     - React DOM router 8.11
     - Sử dụng scss thay css
+    - Redux & Redux Toolkit
 ## Kết nối MySql
     Trong file Aplication.properties (BackEnd)
         spring.datasource.url=jdbc:mysql://localhost:[PORT]/[database name]?useSSL=false&allowPublicKeyRetrieval=true
@@ -20,3 +21,10 @@
         spring.datasource.password=[password]
 ## Sử dụng Portman 
     Sử dụng port 8086 để kiếm tra API
+## Cài đặt thủ công JSONObject cho InteIJ
+    Link dowload : https://jar-download.com/artifacts/com.github.cliftonlabs/json-simple/2.1.2/source-code
+    Cài đặt:
+        1. File
+        2. ProJect Structure
+        3. Moudlue -> add
+        4. Chọn file giải nén từ link dowload

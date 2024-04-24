@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import login from "../styles/login.scss"
 import NhanVienService from "../services/NhanVienService";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import login from "../styles/login.scss"
+import Title from "../components/Title";
+import Nav from "./Nav"
 
 
 const Login = (props) => {
@@ -22,7 +24,7 @@ const Login = (props) => {
     }
 
     async function handleLogin(event) {
-        event.preventDefault()
+        event.preventDefault();
         let nhanvien = {
             manv: manv,
             matkhau: password,
@@ -47,6 +49,7 @@ const Login = (props) => {
     }
     return (
         <>
+            <Nav></Nav>
             <div className="container">
                 <div className="screen">
                     <div className="screen__content">
@@ -78,7 +81,9 @@ const Login = (props) => {
                         <span className="screen__background__shape screen__background__shape1"></span>
                     </div>
                 </div>
+                <Title></Title>
             </div>
+
         </>
     )
 }

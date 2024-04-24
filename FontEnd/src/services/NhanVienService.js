@@ -1,12 +1,17 @@
 import instance from './custom-axios';
 
+const URL = "/nhanvien/";
 
 class NhanVienService {
+
     getListNhanVien() {
-        return instance.get('/nhanvien/list');
+        return instance.get(URL + 'list');
     }
-    loginNhanVien(Data) {
-        return instance.post('/nhanvien/login', Data)
+    loginNhanVien(data) {
+        return instance.post(URL + 'login', data)
+    }
+    insertNhanVien(data) {
+        return instance.post(URL + 'save', data)
     }
 }
 
