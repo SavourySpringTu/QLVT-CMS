@@ -29,11 +29,11 @@ public class NhanVienEntity{
     private boolean TRANGTHAI;
     private String MATKHAU;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST )
     @JoinColumn(name="MACN")
     private ChiNhanhEntity chiNhanhNV;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST )
     @JoinColumn(name="MAQUYEN")
     private VaiTroEntity vaiTroNV;
 

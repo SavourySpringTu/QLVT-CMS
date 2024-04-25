@@ -45,4 +45,9 @@ public class NhanVienController {
         }
         return new ResponseEntity(result, HttpStatus.OK);
     }
+    @RequestMapping(value="/delete",method = RequestMethod.PUT)
+    public ResponseEntity<NhanVienEntity> deleteNhanVien(@RequestBody JSONObject nhanvien){
+        nhanVienService.deleteNhanVien( Integer.parseInt((String) nhanvien.get("manv")));
+        return new ResponseEntity("", HttpStatus.OK);
+    }
 }

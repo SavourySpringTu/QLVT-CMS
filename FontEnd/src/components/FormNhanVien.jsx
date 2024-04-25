@@ -3,7 +3,7 @@ import formNhanVien from "../styles/formNhanVien.scss"
 import NhanVienService from "../services/NhanVienService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { insertNhanVien } from "../redux/slices/nhanvienSlice";
+import { fetchAllNhanVien, insertNhanVien } from "../redux/slices/nhanvienSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const InputNhanVien = () => {
@@ -82,12 +82,11 @@ const InputNhanVien = () => {
                 maquyen: maquyen,
                 matkhau: '123'
             }
-            dispatch(insertNhanVien(nhanvien))
-            // if (response == "Failed") {
-            //     toast.error("Không Thể Thêm Nhân Viên!")
-            // } else {
-            //     toast.success("Thêm Nhân Viên Thành Công")
-            // }
+            console.log(nhanvien)
+            const response = await NhanVienService.insertNhanVien(nhanvien);
+            console.log(response)
+            dispatch(fetchAllNhanVien())
+            toast.success("Thêm Nhân Viên Thành Công")
         }
     }
 

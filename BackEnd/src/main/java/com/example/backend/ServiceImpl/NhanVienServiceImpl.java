@@ -61,7 +61,6 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
     @Override
     public NhanVienEntity insertNhanVien(JSONObject nhanvien){
-        nhanvien.get("manv");
         ChiNhanhEntity cn = chiNhanhRepository.findById(String.valueOf(nhanvien.get("macn"))).orElse(null);
         VaiTroEntity vt = vaiTroRepository.findById(String.valueOf(nhanvien.get("maquyen"))).orElse(null);
         NhanVienEntity result = new NhanVienEntity(
@@ -75,5 +74,10 @@ public class NhanVienServiceImpl implements NhanVienService {
                 cn,
                 vt);
         return nhanVienRepository.save(result);
+    }
+
+    @Override
+    public void deleteNhanVien(int manv){
+        nhanVienRepository.deleteById(manv);
     }
 }

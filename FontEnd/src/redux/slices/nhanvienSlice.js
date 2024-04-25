@@ -9,14 +9,6 @@ export const fetchAllNhanVien = createAsyncThunk(
         return response.data;
     }
 )
-export const insertNhanVien = createAsyncThunk(
-    'nhanvien/insertNhanVien',
-    async (data, thunkAPI) => {
-        const response = await NhanVienService.insertNhanVien(data);
-        return response.data;
-    }
-)
-
 const initialState = {
     listNhanVien: [],
     isLoading: false,
@@ -30,6 +22,7 @@ export const nhanvienSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //================ FETCH =====================
             .addCase(fetchAllNhanVien.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
@@ -40,11 +33,6 @@ export const nhanvienSlice = createSlice({
                 state.isError = false;
             })
             .addCase(fetchAllNhanVien.rejected, (state, action) => {
-                state.isLoading = false;
-                state.isError = true;
-            })
-            .addCase(insertNhanVien.fulfilled, (state, action) => {
-                state.listNhanVien.push(action.payload);
                 state.isLoading = false;
                 state.isError = true;
             })

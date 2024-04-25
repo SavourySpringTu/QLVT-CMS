@@ -10,4 +10,5 @@ public interface NhanVienService {
     List<JSONObject> listNhanVien();
 
     NhanVienEntity insertNhanVien(JSONObject nv);
+    public void deleteNhanVien(int manv);
 }

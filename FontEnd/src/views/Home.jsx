@@ -18,7 +18,6 @@ const Home = () => {
         </head>
         <body>
             <Nav></Nav>
-            <FormNhanVien></FormNhanVien>
             <ListNhanVien></ListNhanVien>
         </body>
     </>)
