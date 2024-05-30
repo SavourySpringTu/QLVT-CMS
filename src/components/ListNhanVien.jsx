@@ -25,6 +25,7 @@ const ListNhanVien = () => {
         console.log("list" + listNhanVien)
         setListNhanVienPage = listNhanVien
         console.log("Page test")
+        console.log("Page test")
         //setListNhanVienPage = listNhanVien.slice((page - 1) * 10, page * 10 - 1)
 
     }
