@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import NhanVienService from '../../services/NhanVienService'
-import axios from 'axios'
-import ListVatTu from '../../components/ListVatTu';
-import VatTuService from '../../services/VatTuService';
 
 export const fetchAllNhanVien = createAsyncThunk(
     'nhanvien/fetchAllNhanVien',

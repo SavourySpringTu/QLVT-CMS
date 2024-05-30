@@ -16,7 +16,7 @@ const ListNhanVien = () => {
     const [listNhanVienPage, setListNhanVienPage] = useState([])
 
     useEffect(() => {
-        let a = dispatch(fetchAllNhanVien())
+        dispatch(fetchAllNhanVien())
         getListNhanVienPage(1);
 
     }, [])

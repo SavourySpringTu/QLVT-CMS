@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import Login from './views/Login';
 import Home from './views/Home'
 import VatTu from './views/VatTu.jsx'
-import Title from './components/Title'
 import { store } from './redux/store.js'
 import { Provider } from 'react-redux'
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>

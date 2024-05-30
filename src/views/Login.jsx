@@ -3,8 +3,8 @@ import NhanVienService from "../services/NhanVienService";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import login from "../styles/login.scss"
 import Title from "../components/Title";
+import "../styles/login.scss"
 
 
 
@@ -34,7 +34,7 @@ const Login = (props) => {
         }
         const response = await NhanVienService.loginNhanVien(nhanvien)
         console.log(response.data)
-        if (response.data == "") {
+        if (response.data === "") {
             toast.error("Đăng Nhập Thất Bại!")
         } else {
             navigate("/trangchu", {
