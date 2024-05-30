@@ -24,9 +24,7 @@ const ListNhanVien = () => {
     const getListNhanVienPage = async (page) => {
         console.log("list" + listNhanVien)
         setListNhanVienPage = listNhanVien
-        console.log("Page" + listNhanVien)
-        console.log("Page" + listNhanVien)
-        console.log("Page" + listNhanVien)
+        console.log("Page test")
         //setListNhanVienPage = listNhanVien.slice((page - 1) * 10, page * 10 - 1)
 
     }
