@@ -1,17 +1,15 @@
 {
   "files": {
-    "main.css": "/SavourySpringTu/QLVT-FrontEnd/static/css/main.d58a0f38.css",
-    "main.js": "/SavourySpringTu/QLVT-FrontEnd/static/js/main.35f35d13.js",
-    "static/js/453.f3bb842a.chunk.js": "/SavourySpringTu/QLVT-FrontEnd/static/js/453.f3bb842a.chunk.js",
-    "static/media/icon-add.svg": "/SavourySpringTu/QLVT-FrontEnd/static/media/icon-add.f577d6d51920207eb74df9f1a7a5ecd1.svg",
-    "static/media/icon-delete.svg": "/SavourySpringTu/QLVT-FrontEnd/static/media/icon-delete.f103d3d2731f6068d4f6ef8a1de1eb74.svg",
-    "index.html": "/SavourySpringTu/QLVT-FrontEnd/index.html",
-    "main.d58a0f38.css.map": "/SavourySpringTu/QLVT-FrontEnd/static/css/main.d58a0f38.css.map",
-    "main.35f35d13.js.map": "/SavourySpringTu/QLVT-FrontEnd/static/js/main.35f35d13.js.map",
-    "453.f3bb842a.chunk.js.map": "/SavourySpringTu/QLVT-FrontEnd/static/js/453.f3bb842a.chunk.js.map"
+    "main.css": "/static/css/main.d58a0f38.css",
+    "main.js": "/static/js/main.e745463c.js",
+    "static/js/453.1b6cbde4.chunk.js": "/static/js/453.1b6cbde4.chunk.js",
+    "index.html": "/index.html",
+    "main.d58a0f38.css.map": "/static/css/main.d58a0f38.css.map",
+    "main.e745463c.js.map": "/static/js/main.e745463c.js.map",
+    "453.1b6cbde4.chunk.js.map": "/static/js/453.1b6cbde4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d58a0f38.css",
-    "static/js/main.35f35d13.js"
+    "static/js/main.e745463c.js"
   ]
 }
