@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import VatTuService from "../services/VatTuService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchAllVatTu, insertNhanVien } from "../redux/slices/vattuSlice";
+import { fetchAllVatTu } from "../redux/slices/vattuSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const FormVatTu = ({ close, vt }) => {

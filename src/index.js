@@ -6,6 +6,7 @@ import Login from './views/Login';
 import Home from './views/Home'
 import VatTu from './views/VatTu.jsx'
 import PhieuNhap from './views/PhieuNhap.jsx'
+import CTPN from './views/CTPN.jsx'
 import { store } from './redux/store.js'
 import { Provider } from 'react-redux'
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
@@ -19,6 +20,7 @@ root.render(
         <Route path="/trangchu" element={<Home />} />
         <Route path="/vattu" element={<VatTu />} />
         <Route path="/phieunhap" element={< PhieuNhap />} />
+        <Route path="/chitietphieunhap" element={< CTPN />} />
       </Routes>
     </BrowserRouter>
   </Provider>

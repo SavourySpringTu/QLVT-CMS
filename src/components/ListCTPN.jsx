@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllPhieuNhap } from "../redux/slices/phieunhapSlice.js";
+import { fetchAllCTPN } from "../redux/slices/ctpnSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/listNhanVien.scss";
-import FormPhieuNhap from "./FormPhieuNhap.jsx";
+import FormCTPN from "./FormCTPN.jsx";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-const ListPhieuNhap = () => {
+const ListCTPN = () => {
   const dispatch = useDispatch();
-  const listPhieuNhap = useSelector((state) => state.phieunhap.listPhieuNhap);
+  const listCTPN = useSelector((state) => state.chitietphieunhap.listCTPN);
 
   useEffect(() => {
-    dispatch(fetchAllPhieuNhap());
+    dispatch(fetchAllCTPN());
   }, []);
 
   async function handleClickXoa(event) {
@@ -37,7 +37,7 @@ const ListPhieuNhap = () => {
         >
           {(close) => (
             <div>
-              <FormPhieuNhap close={close} />
+              <FormCTPN close={close} />
             </div>
           )}
         </Popup>
@@ -52,18 +52,20 @@ const ListPhieuNhap = () => {
         <table id="customers">
           <thead>
             <tr>
-              <th>Mã Phiếu Nhập</th>
-              <th>Ngày Lập Phiếu</th>
+              <th>Mã PN</th>
+              <th>Mã VT</th>
+              <th>Số Lượng</th>
+              <th>Đơn Giá</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {listPhieuNhap.map((pn) => (
+            {listCTPN.map((ctpn) => (
               <Popup
                 trigger={
-                  <tr key={pn.mapn}>
-                    <td>{pn.mapn}</td>
-                    <td>{pn.ngay}</td>
+                  <tr key={(ctpn.mapn, ctpn.mavt)}>
+                    <td>{ctpn.mapn}</td>
+                    <td>{ctpn.ngay}</td>
 
                     <td className="table-Icon">
                       <Popup
@@ -84,7 +86,7 @@ const ListPhieuNhap = () => {
                           <div className="popupDelete">
                             <button
                               className="btnXacNhanXoa"
-                              value={pn.mapn}
+                              value={ctpn.mapn}
                               onClick={handleClickXoa.bind()}
                             >
                               Xác Nhận
@@ -98,7 +100,7 @@ const ListPhieuNhap = () => {
               >
                 {(close) => (
                   <div>
-                    <FormPhieuNhap pn={pn} close={close} />
+                    <FormCTPN ctpn={ctpn} close={close} />
                   </div>
                 )}
               </Popup>
@@ -110,4 +112,4 @@ const ListPhieuNhap = () => {
     </>
   );
 };
-export default ListPhieuNhap;
+export default ListCTPN;
