@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SavourySpringTu/QLVT-FrontEnd/static/css/main.d58a0f38.css",
-    "main.js": "/SavourySpringTu/QLVT-FrontEnd/static/js/main.9e7978e9.js",
-    "static/js/453.1b6cbde4.chunk.js": "/SavourySpringTu/QLVT-FrontEnd/static/js/453.1b6cbde4.chunk.js",
-    "index.html": "/SavourySpringTu/QLVT-FrontEnd/index.html",
-    "main.d58a0f38.css.map": "/SavourySpringTu/QLVT-FrontEnd/static/css/main.d58a0f38.css.map",
-    "main.9e7978e9.js.map": "/SavourySpringTu/QLVT-FrontEnd/static/js/main.9e7978e9.js.map",
-    "453.1b6cbde4.chunk.js.map": "/SavourySpringTu/QLVT-FrontEnd/static/js/453.1b6cbde4.chunk.js.map"
+    "main.css": "/QLVT-FrontEnd/static/css/main.d58a0f38.css",
+    "main.js": "/QLVT-FrontEnd/static/js/main.8734c4a3.js",
+    "static/js/453.1b6cbde4.chunk.js": "/QLVT-FrontEnd/static/js/453.1b6cbde4.chunk.js",
+    "index.html": "/QLVT-FrontEnd/index.html",
+    "main.d58a0f38.css.map": "/QLVT-FrontEnd/static/css/main.d58a0f38.css.map",
+    "main.8734c4a3.js.map": "/QLVT-FrontEnd/static/js/main.8734c4a3.js.map",
+    "453.1b6cbde4.chunk.js.map": "/QLVT-FrontEnd/static/js/453.1b6cbde4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d58a0f38.css",
-    "static/js/main.9e7978e9.js"
+    "static/js/main.8734c4a3.js"
   ]
 }
