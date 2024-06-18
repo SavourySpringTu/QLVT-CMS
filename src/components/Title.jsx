@@ -6,7 +6,7 @@ const Title = () => {
       <div class="two">
         <h1>
           QUẢN LÝ VẬT TƯ
-          <span>by Savoury Spring Tu</span>
+          <span>by Savoury Spring Tua</span>
         </h1>
       </div>
     </>
