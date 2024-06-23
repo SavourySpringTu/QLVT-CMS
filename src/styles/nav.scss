@@ -9,12 +9,11 @@ ul {
     overflow: hidden;
   }
   
-  li {
- 
+  a {
     float: left;
   }
   
-  li a {
+  a {
     font-family: "Raleway", sans-serif;
     color: #080808;
     display: block;
@@ -24,14 +23,20 @@ ul {
     font-style: normal;
     font-weight: 1000;
   }
-  
-  li a:hover:not(.active) {
-    background-color: #504699;
-  }
-  li:hover{
-    background-color: #e7e6ed;
-  }
   .btnOut {
     position:  relative;
-    left: 66.5%;
+    left: 60%;
+  }
+  .menu{
+    width: 70px;
+    height: 70px;
+  }
+  #mySidebar {
+    background-color: #504699;
+    color: white;
+    width: 180px;
+  }
+  #closeMenu{
+    width: 110px;
+    height: 110px;
   }

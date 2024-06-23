@@ -75,6 +75,7 @@ const ListNhanVien = () => {
               <th>Mã NV</th>
               <th>Họ Tên</th>
               <th>Ngày Sinh</th>
+              <th>Email</th>
               <th>Số CMND</th>
               <th>Địa Chỉ</th>
               <th>Lương</th>
@@ -92,6 +93,7 @@ const ListNhanVien = () => {
                     <td>{nv.manv}</td>
                     <td>{nv.hoten}</td>
                     <td>{nv.ngaysinh}</td>
+                    <td>{nv.email}</td>
                     <td>{nv.socmnd}</td>
                     <td>{nv.diachi}</td>
                     <td>{nv.luong}</td>

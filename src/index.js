@@ -16,11 +16,11 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/QLVT-FrontEnd" element={< Login />} />
-        <Route path="/trangchu" element={<Home />} />
-        <Route path="/vattu" element={<VatTu />} />
-        <Route path="/phieunhap" element={< PhieuNhap />} />
-        <Route path="/chitietphieunhap" element={< CTPN />} />
+        <Route path="/QLVT-CMS" element={< Login />} />
+        <Route path="/QLVT-CMS/trangchu" element={<Home />} />
+        <Route path="/QLVT-CMS/vattu" element={<VatTu />} />
+        <Route path="/QLVT-CMS/phieunhap" element={< PhieuNhap />} />
+        <Route path="/QLVT-CMS/chitietphieunhap" element={< CTPN />} />
       </Routes>
     </BrowserRouter>
   </Provider>
