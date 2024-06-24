@@ -21,30 +21,6 @@ const Nav = () => {
       ></link>
 
       <body className="navItem">
-        {/* <ul>
-          <li>
-            <NavLink to="/trangchu">Nhân Viên</NavLink>
-          </li>
-          <li>
-            <NavLink to="/vattu">Vật Tư</NavLink>
-          </li>
-          <li>
-            <NavLink to="/kho">Kho</NavLink>
-          </li>
-          <li>
-            <NavLink to="/phieunhap">Phiếu Nhập</NavLink>
-          </li>
-          <li>
-            <NavLink to="/chitietphieunhap">Chi Tiết PN</NavLink>
-          </li>
-          <li>
-            <NavLink to="/phieuxuat">Phiếu Xuất</NavLink>
-          </li>
-
-          <li className="btnOut">
-            <NavLink to="/QLVT-CMS">Đăng Xuất</NavLink>
-          </li>
-        </ul> */}
         <div
           className="w3-sidebar w3-bar-block w3-border-right"
           style={{ display: "none" }}
@@ -68,6 +44,12 @@ const Nav = () => {
           </a>
           <a className="w3-bar-item w3-button">
             <NavLink to="/QLVT-CMS/kho">Kho</NavLink>
+          </a>
+          <a className="w3-bar-item w3-button">
+            <NavLink to="/QLVT-CMS/dathang">Đặt Hàng</NavLink>
+          </a>
+          <a className="w3-bar-item w3-button">
+            <NavLink to="/QLVT-CMS/ctdh">CTDH</NavLink>
           </a>
           <a className="w3-bar-item w3-button">
             <NavLink to="/QLVT-CMS/phieunhap">Phiếu Nhập</NavLink>

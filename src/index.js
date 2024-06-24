@@ -7,6 +7,8 @@ import Home from './views/Home'
 import VatTu from './views/VatTu.jsx'
 import PhieuNhap from './views/PhieuNhap.jsx'
 import CTPN from './views/CTPN.jsx'
+import Kho from './views/Kho.jsx'
+import DatHang from './views/DatHang.jsx'
 import { store } from './redux/store.js'
 import { Provider } from 'react-redux'
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
@@ -16,9 +18,11 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/QLVT-CMS" element={< Login />} />
+        <Route path="/QLVT-CMS/" element={< Login />} />
         <Route path="/QLVT-CMS/trangchu" element={<Home />} />
         <Route path="/QLVT-CMS/vattu" element={<VatTu />} />
+        <Route path="/QLVT-CMS/kho" element={<Kho />} />
+        <Route path="/QLVT-CMS/dathang" element={<DatHang />} />
         <Route path="/QLVT-CMS/phieunhap" element={< PhieuNhap />} />
         <Route path="/QLVT-CMS/chitietphieunhap" element={< CTPN />} />
       </Routes>

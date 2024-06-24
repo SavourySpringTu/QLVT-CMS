@@ -1,40 +1,40 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import CTPNService from "../../services/CTPNService"
+import KhoService from "../../services/KhoService"
 
-export const fetchAllCTPN = createAsyncThunk(
-    'vattu/fetchAllCTPN',
+export const fetchAllKho = createAsyncThunk(
+    'vattu/fetchAllKho',
     async () => {
-        const response = await CTPNService.getListCTPN();
+        const response = await KhoService.getListKho();
         return response.data;
     }
 )
 const initialState = {
-    listCTPN: [],
+    listKho: [],
     isLoading: false,
     isError: false
 }
-export const ctpnSlice = createSlice({
-    name: 'ctpn',
+export const khoSlice = createSlice({
+    name: 'kho',
     initialState,
     reducers: {
 
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllCTPN.pending, (state, action) => {
+            .addCase(fetchAllKho.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllCTPN.fulfilled, (state, action) => {
-                state.listCTPN = action.payload;
+            .addCase(fetchAllKho.fulfilled, (state, action) => {
+                state.listKho = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllCTPN.rejected, (state, action) => {
+            .addCase(fetchAllKho.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })
     }
 })
 
-export default ctpnSlice.reducer
+export default khoSlice.reducer

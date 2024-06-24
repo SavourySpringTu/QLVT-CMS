@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllPhieuNhap } from "../redux/slices/phieunhapSlice.js";
+import { fetchAllKho } from "../redux/slices/khoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/listNhanVien.scss";
-import FormPhieuNhap from "./FormPhieuNhap.jsx";
 import { Player } from "@lottiefiles/react-lottie-player";
+import FormKho from "./FormKho.jsx";
+import KhoService from "../services/KhoService.js";
 
-const ListPhieuNhap = () => {
+const ListKho = () => {
   const dispatch = useDispatch();
-  const listPhieuNhap = useSelector((state) => state.phieunhap.listPhieuNhap);
+  const listKho = useSelector((state) => state.kho.listKho);
 
   useEffect(() => {
-    dispatch(fetchAllPhieuNhap());
+    dispatch(fetchAllKho());
   }, []);
 
   async function handleClickXoa(event) {
     event.preventDefault();
+    let kho = {
+      makho: event.target.value,
+    };
+    const response = await KhoService.deleteKho(kho);
+    console.log(response);
+    if (response.data == 0) {
+      toast.error("Xóa Vật Tư Thất Bại!");
+    } else if (response.data == 1) {
+      dispatch(fetchAllKho());
+      toast.success("Xóa Vật Tư Thành Công");
+    }
   }
   return (
     <>
@@ -37,7 +49,7 @@ const ListPhieuNhap = () => {
         >
           {(close) => (
             <div>
-              <FormPhieuNhap close={close} />
+              <FormKho close={close} />
             </div>
           )}
         </Popup>
@@ -52,21 +64,22 @@ const ListPhieuNhap = () => {
         <table id="customers">
           <thead>
             <tr>
-              <th>Mã Phiếu Nhập</th>
-              <th>Ngày Lập Phiếu</th>
-              <th>Mã NV</th>
               <th>Mã Kho</th>
-              <th>Đặt Hàng</th>
+              <th>Tên Kho</th>
+              <th>Địa Chỉ</th>
+              <th>Chi Nhánh</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {listPhieuNhap.map((pn) => (
+            {listKho.map((kho) => (
               <Popup
                 trigger={
-                  <tr key={pn.mapn}>
-                    <td>{pn.mapn}</td>
-                    <td>{pn.ngay}</td>
-
+                  <tr key={kho.makho}>
+                    <td>{kho.makho}</td>
+                    <td>{kho.tenkho}</td>
+                    <td>{kho.diachi}</td>
+                    <td>{kho.chinhanh}</td>
                     <td className="table-Icon">
                       <Popup
                         trigger={
@@ -86,7 +99,7 @@ const ListPhieuNhap = () => {
                           <div className="popupDelete">
                             <button
                               className="btnXacNhanXoa"
-                              value={pn.mapn}
+                              value={kho.makho}
                               onClick={handleClickXoa.bind()}
                             >
                               Xác Nhận
@@ -100,7 +113,7 @@ const ListPhieuNhap = () => {
               >
                 {(close) => (
                   <div>
-                    <FormPhieuNhap pn={pn} close={close} />
+                    <FormKho kho={kho} close={close} />
                   </div>
                 )}
               </Popup>
@@ -112,4 +125,4 @@ const ListPhieuNhap = () => {
     </>
   );
 };
-export default ListPhieuNhap;
+export default ListKho;

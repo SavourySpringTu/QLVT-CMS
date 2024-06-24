@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllPhieuNhap } from "../redux/slices/phieunhapSlice.js";
+import { fetchAllDatHang } from "../redux/slices/dathangSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/listNhanVien.scss";
-import FormPhieuNhap from "./FormPhieuNhap.jsx";
+import FormDatHang from "./FormDatHang.jsx";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-const ListPhieuNhap = () => {
+const ListDatHang = () => {
   const dispatch = useDispatch();
-  const listPhieuNhap = useSelector((state) => state.phieunhap.listPhieuNhap);
+  const listDatHang = useSelector((state) => state.dathang.listDatHang);
 
   useEffect(() => {
-    dispatch(fetchAllPhieuNhap());
+    dispatch(fetchAllDatHang());
   }, []);
 
   async function handleClickXoa(event) {
@@ -37,7 +37,7 @@ const ListPhieuNhap = () => {
         >
           {(close) => (
             <div>
-              <FormPhieuNhap close={close} />
+              <FormDatHang close={close} />
             </div>
           )}
         </Popup>
@@ -52,20 +52,24 @@ const ListPhieuNhap = () => {
         <table id="customers">
           <thead>
             <tr>
-              <th>Mã Phiếu Nhập</th>
-              <th>Ngày Lập Phiếu</th>
+              <th>Mã DDH</th>
+              <th>Ngày</th>
+              <th>Nhà CC</th>
               <th>Mã NV</th>
               <th>Mã Kho</th>
-              <th>Đặt Hàng</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {listPhieuNhap.map((pn) => (
+            {listDatHang.map((dh) => (
               <Popup
                 trigger={
-                  <tr key={pn.mapn}>
-                    <td>{pn.mapn}</td>
-                    <td>{pn.ngay}</td>
+                  <tr key={dh.maddh}>
+                    <td>{dh.maddh}</td>
+                    <td>{dh.ngay}</td>
+                    <td>{dh.nhacc}</td>
+                    <td>{dh.manv}</td>
+                    <td>{dh.makho}</td>
 
                     <td className="table-Icon">
                       <Popup
@@ -86,7 +90,7 @@ const ListPhieuNhap = () => {
                           <div className="popupDelete">
                             <button
                               className="btnXacNhanXoa"
-                              value={pn.mapn}
+                              value={dh.madh}
                               onClick={handleClickXoa.bind()}
                             >
                               Xác Nhận
@@ -100,7 +104,7 @@ const ListPhieuNhap = () => {
               >
                 {(close) => (
                   <div>
-                    <FormPhieuNhap pn={pn} close={close} />
+                    <FormDatHang dh={dh} close={close} />
                   </div>
                 )}
               </Popup>
@@ -112,4 +116,4 @@ const ListPhieuNhap = () => {
     </>
   );
 };
-export default ListPhieuNhap;
+export default ListDatHang;
