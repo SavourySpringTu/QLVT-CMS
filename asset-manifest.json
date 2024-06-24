@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/QLVT-CMS/static/css/main.b6ccc155.css",
-    "main.js": "/QLVT-CMS/static/js/main.6c7012ef.js",
+    "main.js": "/QLVT-CMS/static/js/main.0fe44e1d.js",
     "static/js/453.1b6cbde4.chunk.js": "/QLVT-CMS/static/js/453.1b6cbde4.chunk.js",
     "index.html": "/QLVT-CMS/index.html",
     "main.b6ccc155.css.map": "/QLVT-CMS/static/css/main.b6ccc155.css.map",
-    "main.6c7012ef.js.map": "/QLVT-CMS/static/js/main.6c7012ef.js.map",
+    "main.0fe44e1d.js.map": "/QLVT-CMS/static/js/main.0fe44e1d.js.map",
     "453.1b6cbde4.chunk.js.map": "/QLVT-CMS/static/js/453.1b6cbde4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b6ccc155.css",
-    "static/js/main.6c7012ef.js"
+    "static/js/main.0fe44e1d.js"
   ]
 }
