@@ -3,8 +3,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { fetchCTDHbyQuyenandChiNhanh } from "../redux/slices/ctdhSlice";
 import { useDispatch, useSelector } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
 import CTDHService from "../services/CTDHService";
+//import "react-toastify/dist/ReactToastify.css";
 
 const FormCTDH = ({ close, ctdh }) => {
   const dispatch = useDispatch();
@@ -56,7 +56,6 @@ const FormCTDH = ({ close, ctdh }) => {
     }
   }, []);
   async function handleSubmit(event) {
-    event.preventDefault();
     if (verify() == true) {
       let data = {
         maddh: maddh,
@@ -64,6 +63,7 @@ const FormCTDH = ({ close, ctdh }) => {
         soluong: soluong,
         dongia: dongia,
       };
+      console.log(data);
       let fetch = {
         maquyen: cookies.nhanvien.vaiTroNV.maquyen,
         macn: cookies.nhanvien.chiNhanhNV.macn,
@@ -74,17 +74,25 @@ const FormCTDH = ({ close, ctdh }) => {
           toast.error("Thêm Thất Bại!");
         } else {
           dispatch(fetchCTDHbyQuyenandChiNhanh(fetch));
-          console.log()
+          console.log();
           toast.success("Thêm Thành Công!");
         }
       } else {
-        // const response = await CTDHService.updateCTDH(ctdh);
-        // if (response == 0) {
-        //   toast.error("Cập Nhật Thất Bại!");
-        // } else {
-        //   dispatch(fetchCTDHbyQuyenandChiNhanh(fetch));
-        //   toast.success("Cập Nhật Thành Công!");
-        // }
+        let dataupdate = {
+          mavt: ctdh.mavt.toString(),
+          mavtupdate: mavt.toString(),
+          maddh: ctdh.maddh.toString(),
+          soluong: soluong.toString(),
+          dongia: dongia.toString(),
+        };
+        console.log(dataupdate);
+        const response = await CTDHService.updateCTDH(dataupdate);
+        if (response == 0) {
+          toast.error("Cập Nhật Thất Bại!");
+        } else {
+          dispatch(fetchCTDHbyQuyenandChiNhanh(fetch));
+          toast.success("Cập Nhật Thành Công!");
+        }
       }
     }
   }
@@ -92,44 +100,37 @@ const FormCTDH = ({ close, ctdh }) => {
     <>
       <div className="fixed inset-0 backdrop-blur-sm">
         <div className="formbold-form-wrapper">
-          <form action="https://formbold.com/s/FORM_ID" method="POST">
-            <div className="formbold-input-flex">
-              <div>
-                <label className="formbold-form-label">Mã CTDH</label>
-                <input type="number" name="inputMaDDH" className="formbold-form-input" onChange={handleChangeMaDDH} />
-              </div>
-              <div>
-                <label className="formbold-form-label"> Mã VT </label>
-                <select className="formbold-form-input" name="inputMaVT" onChange={handleChangeMaVT}>
-                  {listVatTu.map((vt) => (
-                    <option value={vt.mavt}>{vt.tenvt}</option>
-                  ))}
-                </select>
-              </div>
+          <div className="formbold-input-flex">
+            <div>
+              <label className="formbold-form-label">Mã CTDH</label>
+              <input type="number" name="inputMaDDH" className="formbold-form-input" onChange={handleChangeMaDDH} />
             </div>
+            <div>
+              <label className="formbold-form-label"> Mã VT </label>
+              <select className="formbold-form-input" name="inputMaVT" onChange={handleChangeMaVT}>
+                {listVatTu.map((vt) => (
+                  <option value={vt.mavt}>{vt.tenvt}</option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-            <div className="formbold-input-flex">
-              <div>
-                <label className="formbold-form-label"> Số Lượng</label>
-                <input
-                  type="number"
-                  name="inputSoLuong"
-                  className="formbold-form-input"
-                  onChange={handleChangeSoLuong}
-                />
-              </div>
-              <div>
-                <label className="formbold-form-label"> Đơn Giá</label>
-                <input type="number" name="inputDonGia" className="formbold-form-input" onChange={handleChangeDonGia} />
-              </div>
+          <div className="formbold-input-flex">
+            <div>
+              <label className="formbold-form-label"> Số Lượng</label>
+              <input type="number" name="inputSoLuong" className="formbold-form-input" onChange={handleChangeSoLuong} />
             </div>
-            <button className="formbold-btn" onClick={handleSubmit}>
-              Xác Nhận
-            </button>
-            <button className="formbold-btn" id="btnClose" onClick={close}>
-              Đóng
-            </button>
-          </form>
+            <div>
+              <label className="formbold-form-label"> Đơn Giá</label>
+              <input type="number" name="inputDonGia" className="formbold-form-input" onChange={handleChangeDonGia} />
+            </div>
+          </div>
+          <button className="formbold-btn" onClick={handleSubmit}>
+            Xác Nhận
+          </button>
+          <button className="formbold-btn" id="btnClose" onClick={close}>
+            Đóng
+          </button>
         </div>
       </div>
       <ToastContainer />

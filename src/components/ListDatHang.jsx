@@ -5,35 +5,30 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { useDispatch } from "react-redux";
 import { fetchDatHangbyQuyenandChiNhanh } from "../redux/slices/dathangSlice.js";
 import { useCookies } from "react-cookie";
+import DatHangService from "../services/DatHangService.js";
 import Popup from "reactjs-popup";
 import FormDatHang from "./FormDatHang.jsx";
 import FormCTDH from "./FormCTDH.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/listchitiet.scss";
-import DatHangService from "../services/DatHangService.js";
 
 const ListDatHang = () => {
   const dispatch = useDispatch();
   const listDatHang = useSelector((state) => state.dathang.listDatHang);
-  const listCTDH = useSelector((state) => state.chitietdathang.listCTDH);
+  let listCTDH = useSelector((state) => state.chitietdathang.listCTDH);
 
+  const [listCTDH1, setListCTDH1] = useState(useSelector((state) => state.chitietdathang.listCTDH));
   const [cookies] = useCookies(["nhanvien"]);
-  const [listCTDH1, setListCTDH1] = useState([]);
   const [inputSearchCT, setInputSearchCT] = useState();
 
-  useEffect(() => {
-    if (listCTDH == "") {
-      setListCTDH1([]);
-    } else {
-      setListCTDH1(listCTDH);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const handleChangSearch = (event) => {
-    console.log(event.target.value);
     setInputSearchCT(event.target.value);
   };
-  const handleSearchCTDH = () => {
+
+  const handleSearchCTDH = (event) => {
+    event.preventDefault();
     if (inputSearchCT == "") {
       setListCTDH1(listCTDH);
     } else {
@@ -69,11 +64,13 @@ const ListDatHang = () => {
       };
       console.log(input.maddh);
       const response = await DatHangService.deleteDatHang(input);
-      dispatch(fetchDatHangbyQuyenandChiNhanh(fetch));
-      toast.success("Xóa Thành Công!");
-    } else {
-      toast.error("Không Thể Xóa!");
-      return;
+      if (response == 1) {
+        dispatch(fetchDatHangbyQuyenandChiNhanh(fetch));
+        toast.success("Xóa Thành Công!");
+      } else {
+        toast.error("Không Thể Xóa!");
+        return;
+      }
     }
   }
   return (

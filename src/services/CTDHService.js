@@ -9,6 +9,9 @@ class CTDHService {
     insertCTDH(data){
         return instance.post(URL + 'insert',data)
     }
+    updateCTDH(data){
+        return instance.put(URL + 'update',data)
+    }
     
 }
 export default new CTDHService();
