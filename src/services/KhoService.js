@@ -4,8 +4,8 @@ const URL = "/kho/";
 
 class KhoService {
 
-    getListKho() {
-        return instance.get(URL + 'list');
+    getListKho(data) {
+        return instance.post(URL + 'list',data);
     }
 }
 

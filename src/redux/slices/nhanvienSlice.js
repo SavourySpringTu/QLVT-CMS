@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import NhanVienService from '../../services/NhanVienService'
 
-export const fetchAllNhanVien = createAsyncThunk(
-    'nhanvien/fetchAllNhanVien',
-    async () => {
-        const response = await NhanVienService.getListNhanVien();
+export const fetchNhanVienbyQuyenandChiNhanh = createAsyncThunk(
+    'nhanvien/fetchNhanVienbyQuyenandChiNhanh',
+    async (input) => {
+        const response = await NhanVienService.getListNhanVien(input);
         return response.data;
     }
 )
@@ -21,16 +21,16 @@ export const nhanvienSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllNhanVien.pending, (state, action) => {
+            .addCase(fetchNhanVienbyQuyenandChiNhanh.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllNhanVien.fulfilled, (state, action) => {
+            .addCase(fetchNhanVienbyQuyenandChiNhanh.fulfilled, (state, action) => {
                 state.listNhanVien = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllNhanVien.rejected, (state, action) => {
+            .addCase(fetchNhanVienbyQuyenandChiNhanh.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })

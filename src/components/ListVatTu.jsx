@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { fetchAllVatTu } from "../redux/slices/vattuSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/listNhanVien.scss";
+import "../styles/list.scss";
 import { Player } from "@lottiefiles/react-lottie-player";
 import FormVatTu from "./FormVatTu.jsx";
 import VatTuService from "../services/VatTuService.js";
@@ -12,10 +12,6 @@ import VatTuService from "../services/VatTuService.js";
 const ListVatTu = () => {
   const dispatch = useDispatch();
   const listVatTu = useSelector((state) => state.vattu.listVatTu);
-
-  useEffect(() => {
-    dispatch(fetchAllVatTu());
-  }, []);
 
   async function handleClickXoa(event) {
     event.preventDefault();
@@ -55,10 +51,7 @@ const ListVatTu = () => {
         </Popup>
       </div>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
         <table id="customers">
@@ -97,11 +90,7 @@ const ListVatTu = () => {
                       >
                         {(close) => (
                           <div className="popupDelete">
-                            <button
-                              className="btnXacNhanXoa"
-                              value={vt.mavt}
-                              onClick={handleClickXoa.bind()}
-                            >
+                            <button className="btnXacNhanXoa" value={vt.mavt} onClick={handleClickXoa.bind()}>
                               Xác Nhận
                             </button>
                           </div>

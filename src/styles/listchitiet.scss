@@ -1,0 +1,112 @@
+
+//=================  popup =========================
+.popupDelete{
+    inset: 0;
+    background-color: #6a64f1;;
+    align-items: center;
+    width: 130px;
+    height: 52px;
+  }
+  
+  .btnXacNhanXoa {
+    background: #fff;
+    margin-top: 8%;
+    margin-left: 23%;
+    text-transform: uppercase;
+    border-radius: 7%;
+    padding: 9px;
+    font-size: 10px;
+    color: black;
+    font-weight: bold;
+  }
+  //=============== animation add =====================
+  .addAnimation{
+    position: absolute;
+    top: 13%;
+    left: 10%;
+  }
+  .addAnimationCT{
+    position: absolute;
+    top: 13%;
+    left: 55%;
+  }
+  //=============== Table ======================
+  #table {
+      align-items: center;
+      text-align: center;
+      border-collapse: collapse;
+  
+    }
+    
+    #table td, #table th {
+  
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    #table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #6a64f1;
+        color: white;
+      }
+    #table tr{background-color: #f2f2f2;}
+    
+    #table tr:hover {background-color: #ddd;}
+
+    // =========== dat hang ===============
+
+    .dathang{
+        position: absolute;
+        width: 35%;
+        left: 10%;
+        top: 20%;  
+    }
+    // =========== ctdh ===================
+    .ctdh{
+        position: absolute;
+        width: 35%;
+        left: 55%;
+        top: 20%; 
+    }
+
+  //================ Paginate ==================
+  .page {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+    background-color: #ddd;
+  }
+  .page\:active {
+    background: lighten(#202020, 3%);
+    position: relative;
+  }
+  
+  // =============== SEARCH ===============
+
+  .inputSearch{
+    position: absolute;
+    top: 16%;
+    left: 79%;
+    width: 100px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+  }
+  
+  .btnSearch{
+    position: absolute;
+    top: 16%;
+    left: 86%;
+    width: 55px;
+    background-color: #6a64f1;
+    border-radius: 4px;
+    border-color: white;
+    border-width: 1px;
+    text-align: center; 
+  }
+  
+  .btnSearch:hover{
+    background-color: #ddd;
+  }

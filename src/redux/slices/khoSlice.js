@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import KhoService from "../../services/KhoService"
 
-export const fetchAllKho = createAsyncThunk(
-    'vattu/fetchAllKho',
-    async () => {
-        const response = await KhoService.getListKho();
+export const fetchKhobyQuyenandChiNhanh = createAsyncThunk(
+    'kho/fetchKhobyQuyenandChiNhanh',
+    async (input) => {
+        const response = await KhoService.getListKho(input);
         return response.data;
     }
 )
@@ -21,16 +21,16 @@ export const khoSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllKho.pending, (state, action) => {
+            .addCase(fetchKhobyQuyenandChiNhanh.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllKho.fulfilled, (state, action) => {
+            .addCase(fetchKhobyQuyenandChiNhanh.fulfilled, (state, action) => {
                 state.listKho = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllKho.rejected, (state, action) => {
+            .addCase(fetchKhobyQuyenandChiNhanh.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })

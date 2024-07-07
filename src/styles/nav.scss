@@ -29,7 +29,7 @@ ul {
   }
   .menu{
     width: 70px;
-    height: 70px;
+    height: 700px;
   }
   #mySidebar {
     background-color: #504699;
@@ -40,3 +40,26 @@ ul {
     width: 110px;
     height: 110px;
   }
+  .TopNav{
+    position: absolute;
+    width: 100%;
+    height: 8%;
+    background-color: #504699;
+  }
+  .info{
+    position: absolute;
+    font-family: "Raleway", sans-serif;
+    color: white;
+    font-weight: 1000;
+    top: 27%;
+    left: 32%;
+  }
+  .btnOut{
+    position: absolute;
+    width: 90px;
+    left: 95%;
+    top: -6%;
+  }
+
+  // ================ W3SCHOOLS =================== //
+  

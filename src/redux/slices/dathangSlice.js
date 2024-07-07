@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import DatHangService from "../../services/DatHangService"
 
-export const fetchAllDatHang = createAsyncThunk(
-    'dathang/fetchAllDatHang',
-    async () => {
-        const response = await DatHangService.getListDatHang();
-        console.log(response.data)
+export const fetchDatHangbyQuyenandChiNhanh = createAsyncThunk(
+    'dathang/fetchDatHangbyQuyenandChiNhanh',
+    async (input) => { 
+        const response = await DatHangService.getListDatHang(input);
         return response.data;
     }
 )
@@ -22,16 +21,16 @@ export const dathangSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllDatHang.pending, (state, action) => {
+            .addCase(fetchDatHangbyQuyenandChiNhanh.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllDatHang.fulfilled, (state, action) => {
+            .addCase(fetchDatHangbyQuyenandChiNhanh.fulfilled, (state, action) => {
                 state.listDatHang = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllDatHang.rejected, (state, action) => {
+            .addCase(fetchDatHangbyQuyenandChiNhanh.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })

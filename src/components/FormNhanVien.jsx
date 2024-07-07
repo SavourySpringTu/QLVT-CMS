@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import formNhanVien from "../styles/formNhanVien.scss";
-import NhanVienService from "../services/NhanVienService";
 import { ToastContainer, toast } from "react-toastify";
+import { fetchNhanVienbyQuyenandChiNhanh } from "../redux/slices/nhanvienSlice";
+import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+import NhanVienService from "../services/NhanVienService";
+import "../styles/form.scss";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  fetchAllNhanVien,
-  insertNhanVien,
-} from "../redux/slices/nhanvienSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const FormNhanVien = ({ close, nv }) => {
   const dispatch = useDispatch();
+
+  const [cookies] = useCookies(["nhanvien"]);
   const [manv, setMaNV] = useState("");
   const [hoten, setHoTen] = useState("");
   const [socmnd, setSoCMND] = useState("");
@@ -21,6 +21,7 @@ const FormNhanVien = ({ close, nv }) => {
   const [maquyen, setMaQuyen] = useState("Q01");
   const [cn, setCN] = useState("CN01");
   const [trangthai, setTrangThai] = useState(false);
+
   const handleChangeMaNV = (event) => {
     setMaNV(event.target.value);
   };
@@ -71,6 +72,7 @@ const FormNhanVien = ({ close, nv }) => {
 
     return true;
   }
+
   useEffect(() => {
     if (typeof nv === "undefined") {
       console.log("undefined");
@@ -94,8 +96,7 @@ const FormNhanVien = ({ close, nv }) => {
       setNgaySinh(nv.ngaysinh);
       document.querySelector('select[name="inputMaQuyen"]').value = nv.maquyen;
       setMaQuyen(nv.maquyen);
-      document.querySelector('select[name="inputTrangThai"]').value =
-        nv.trangthai;
+      document.querySelector('select[name="inputTrangThai"]').value = nv.trangthai;
       setTrangThai(nv.trangthai);
     }
   }, []);
@@ -114,14 +115,17 @@ const FormNhanVien = ({ close, nv }) => {
         trangthai: a,
         macn: cn,
         maquyen: maquyen,
-        matkhau: "123",
+      };
+      let fetch = {
+        maquyen: cookies.nhanvien.vaiTroNV.maquyen,
+        macn: cookies.nhanvien.chiNhanhNV.macn,
       };
       if (manv == "") {
         const response = await NhanVienService.insertNhanVien(nhanvien);
         if (response == 0) {
           toast.error("Thêm Thất Bại!");
         } else {
-          dispatch(fetchAllNhanVien());
+          dispatch(fetchNhanVienbyQuyenandChiNhanh(fetch));
           toast.success("Thêm Thành Công!");
         }
       } else {
@@ -129,7 +133,7 @@ const FormNhanVien = ({ close, nv }) => {
         if (response == 0) {
           toast.error("Thêm Thất Bại!");
         } else {
-          dispatch(fetchAllNhanVien());
+          dispatch(fetchNhanVienbyQuyenandChiNhanh(fetch));
           toast.success("Sửa Thành Công!");
         }
       }
@@ -153,24 +157,14 @@ const FormNhanVien = ({ close, nv }) => {
               </div>
               <div>
                 <label className="formbold-form-label"> Họ Tên </label>
-                <input
-                  type="text"
-                  name="inputHoTen"
-                  className="formbold-form-input"
-                  onChange={handleChangeHoTen}
-                />
+                <input type="text" name="inputHoTen" className="formbold-form-input" onChange={handleChangeHoTen} />
               </div>
             </div>
 
             <div className="formbold-input-flex">
               <div>
                 <label className="formbold-form-label"> Số CMND </label>
-                <input
-                  type="number"
-                  name="inputSoCMND"
-                  className="formbold-form-input"
-                  onChange={handleChangeSoCMND}
-                />
+                <input type="number" name="inputSoCMND" className="formbold-form-input" onChange={handleChangeSoCMND} />
               </div>
               <div>
                 <label className="formbold-form-label"> Ngày Sinh </label>
@@ -185,42 +179,22 @@ const FormNhanVien = ({ close, nv }) => {
 
             <div className="formbold-mb-3">
               <label className="formbold-form-label">Email</label>
-              <input
-                type="text"
-                name="inputEmail"
-                className="formbold-form-input"
-                onChange={handleChangeEmail}
-              />
+              <input type="text" name="inputEmail" className="formbold-form-input" onChange={handleChangeEmail} />
             </div>
 
             <div className="formbold-mb-3">
               <label className="formbold-form-label">Địa Chỉ</label>
-              <input
-                type="text"
-                name="inputDiaChi"
-                className="formbold-form-input"
-                onChange={handleChangeDiaChi}
-              />
+              <input type="text" name="inputDiaChi" className="formbold-form-input" onChange={handleChangeDiaChi} />
             </div>
 
             <div className="formbold-input-flex">
               <div>
                 <label className="formbold-form-label"> Lương </label>
-                <input
-                  type="number"
-                  name="inputLuong"
-                  className="formbold-form-input"
-                  onChange={handleChangeLuong}
-                />
+                <input type="number" name="inputLuong" className="formbold-form-input" onChange={handleChangeLuong} />
               </div>
               <div>
                 <label className="formbold-form-label"> Mã CN </label>
-                <select
-                  type="text"
-                  name="inputCN"
-                  className="formbold-form-input"
-                  onChange={handleChangeCN}
-                >
+                <select type="text" name="inputCN" className="formbold-form-input" onChange={handleChangeCN}>
                   <option value="CN01">Hà Nội</option>
                   <option value="CN02">Hồ Chí Minh</option>
                 </select>
@@ -230,29 +204,25 @@ const FormNhanVien = ({ close, nv }) => {
             <div className="formbold-input-flex">
               <div>
                 <label className="formbold-form-label"> Mã Quyền</label>
-                <select
-                  type="text"
-                  name="inputMaQuyen"
-                  className="formbold-form-input"
-                  onChange={handleChangeMaQuyen}
-                >
+                <select type="text" name="inputMaQuyen" className="formbold-form-input" onChange={handleChangeMaQuyen}>
                   <option value="Q01">Công Ty</option>
                   <option value="Q02">Chi Nhánh</option>
                   <option value="Q03">Nhân Viên</option>
                 </select>
               </div>
               <div>
-                <label className="formbold-form-label">Trạng Thái</label>
-                <select
-                  name="inputTrangThai"
-                  className="formbold-form-input"
-                  type="checkbox"
-                  defaultChecked={false}
-                  onChange={handleChangeTrangThai}
-                >
-                  <option value="false">Chưa Nghỉ</option>
-                  <option value="true">Đã Nghỉ</option>
-                </select>
+                <div>
+                  <label className="formbold-form-label">Trạng Thái</label>
+                  <select
+                    name="inputTrangThai"
+                    className="formbold-form-input"
+                    defaultChecked={false}
+                    onChange={handleChangeTrangThai}
+                  >
+                    <option value="false">Chưa Nghỉ</option>
+                    <option value="true">Đã Nghỉ</option>
+                  </select>
+                </div>
               </div>
             </div>
 

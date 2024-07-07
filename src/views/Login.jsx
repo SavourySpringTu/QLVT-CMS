@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import NhanVienService from "../services/NhanVienService";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { fetchKhobyQuyenandChiNhanh } from "../redux/slices/khoSlice.js";
+import { fetchNhanVienbyQuyenandChiNhanh } from "../redux/slices/nhanvienSlice";
+import { fetchAllVatTu } from "../redux/slices/vattuSlice";
+import { fetchDatHangbyQuyenandChiNhanh } from "../redux/slices/dathangSlice.js";
+import { fetchCTDHbyQuyenandChiNhanh } from "../redux/slices/ctdhSlice.js";
+import NhanVienService from "../services/NhanVienService";
 import Title from "../components/Title";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/login.scss";
 
 const Login = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [cookies, setCookie] = useCookies(["nhanvien"]);
   const [manv, setMaNV] = useState("");
   const [password, setPassword] = useState("");
   const [cn, setCN] = useState("CN01");
@@ -26,23 +36,33 @@ const Login = (props) => {
     let nhanvien = {
       manv: manv,
       matkhau: password,
+      hoten: "",
+      vaiTroNV: {
+        maquyen: "",
+      },
       chiNhanhNV: {
         macn: cn,
       },
     };
     const response = await NhanVienService.loginNhanVien(nhanvien);
-    console.log(response.data);
     if (response.data === "") {
       toast.error("Đăng Nhập Thất Bại!");
     } else {
-      navigate("/trangchu", {
-        state: {
-          manv: response.data.manv,
-          hoten: response.data.hoten,
-          macn: response.data.chiNhanhNV.macn,
-          maquyen: response.data.vaiTroNV.maquyen,
-        },
-      });
+      nhanvien.hoten = response.data.hoten;
+      nhanvien.vaiTroNV.maquyen = response.data.vaiTroNV.maquyen;
+      // ========================= LOAD STATE REDUX ======================
+      let data = {
+        maquyen: nhanvien.vaiTroNV.maquyen,
+        macn: nhanvien.chiNhanhNV.macn,
+      };
+      dispatch(fetchDatHangbyQuyenandChiNhanh(data));
+      dispatch(fetchNhanVienbyQuyenandChiNhanh(data));
+      dispatch(fetchCTDHbyQuyenandChiNhanh(data));
+      dispatch(fetchAllVatTu());
+      dispatch(fetchKhobyQuyenandChiNhanh(data));
+      // =================================================================
+      setCookie("nhanvien", nhanvien, { path: "/", maxAge: 3600 });
+      navigate("/QLVT-CMS/trangchu");
     }
   }
   return (
@@ -80,12 +100,7 @@ const Login = (props) => {
                     defaultChecked="checked"
                   />
                   <label htmlFor="sizeWeight">Hà Nội</label>
-                  <input
-                    type="radio"
-                    name="sizeBy"
-                    id="sizeDimensions"
-                    onClick={() => handleCheckRadio("CN02")}
-                  />
+                  <input type="radio" name="sizeBy" id="sizeDimensions" onClick={() => handleCheckRadio("CN02")} />
                   <label htmlFor="sizeDimensions">Hồ Chí Minh</label>
                 </div>
               </fieldset>

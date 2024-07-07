@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/listNhanVien.scss";
+import "../styles/list.scss";
 import FormPhieuNhap from "./FormPhieuNhap.jsx";
 import { Player } from "@lottiefiles/react-lottie-player";
 
@@ -43,10 +43,7 @@ const ListPhieuNhap = () => {
         </Popup>
       </div>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
         <table id="customers">
@@ -84,11 +81,7 @@ const ListPhieuNhap = () => {
                       >
                         {(close) => (
                           <div className="popupDelete">
-                            <button
-                              className="btnXacNhanXoa"
-                              value={pn.mapn}
-                              onClick={handleClickXoa.bind()}
-                            >
+                            <button className="btnXacNhanXoa" value={pn.mapn} onClick={handleClickXoa.bind()}>
                               Xác Nhận
                             </button>
                           </div>

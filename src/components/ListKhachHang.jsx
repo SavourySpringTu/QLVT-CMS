@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllCTPN } from "../redux/slices/ctpnSlice.js";
+import { fetchAllKhachHang } from "../redux/slices/khachhangSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/listNhanVien.scss";
-import FormCTPN from "./FormCTPN.jsx";
+import "../styles/list.scss";
+import FormKhachHang from "./FormKhachHang.jsx";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-const ListCTPN = () => {
+const ListKhachHang = () => {
   const dispatch = useDispatch();
-  const listCTPN = useSelector((state) => state.chitietphieunhap.listCTPN);
+  const listKhachHang = useSelector((state) => state.khachhang.listKhachHang);
 
   useEffect(() => {
-    dispatch(fetchAllCTPN());
+    dispatch(fetchAllKhachHang());
   }, []);
 
   async function handleClickXoa(event) {
@@ -37,35 +37,36 @@ const ListCTPN = () => {
         >
           {(close) => (
             <div>
-              <FormCTPN close={close} />
+              <FormKhachHang close={close} />
             </div>
           )}
         </Popup>
       </div>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
         <table id="customers">
           <thead>
             <tr>
-              <th>Mã PN</th>
-              <th>Mã VT</th>
-              <th>Số Lượng</th>
-              <th>Đơn Giá</th>
+              <th>Mã KH</th>
+              <th>Họ Tên</th>
+              <th>Email</th>
+              <th>Số Điện Thoại</th>
+              <th>Địa Chỉ</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {listCTPN.map((ctpn) => (
+            {listKhachHang.map((kh) => (
               <Popup
                 trigger={
-                  <tr key={(ctpn.mapn, ctpn.mavt)}>
-                    <td>{ctpn.mapn}</td>
-                    <td>{ctpn.ngay}</td>
+                  <tr key={kh.makh}>
+                    <td>{kh.makh}</td>
+                    <td>{kh.hoten}</td>
+                    <td>{kh.email}</td>
+                    <td>{kh.sdt}</td>
+                    <td>{kh.diachi}</td>
 
                     <td className="table-Icon">
                       <Popup
@@ -84,11 +85,7 @@ const ListCTPN = () => {
                       >
                         {(close) => (
                           <div className="popupDelete">
-                            <button
-                              className="btnXacNhanXoa"
-                              value={ctpn.mapn}
-                              onClick={handleClickXoa.bind()}
-                            >
+                            <button className="btnXacNhanXoa" value={kh.makh} onClick={handleClickXoa.bind()}>
                               Xác Nhận
                             </button>
                           </div>
@@ -100,7 +97,7 @@ const ListCTPN = () => {
               >
                 {(close) => (
                   <div>
-                    <FormCTPN ctpn={ctpn} close={close} />
+                    <FormKhachHang kh={kh} close={close} />
                   </div>
                 )}
               </Popup>
@@ -112,4 +109,4 @@ const ListCTPN = () => {
     </>
   );
 };
-export default ListCTPN;
+export default ListKhachHang;

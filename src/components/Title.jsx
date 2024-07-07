@@ -3,10 +3,10 @@ import title from "../styles/title.scss";
 const Title = () => {
   return (
     <>
-      <div class="two">
+      <div className="two">
         <h1>
           QUẢN LÝ VẬT TƯ
-          <span>by Savoury Spring Tua</span>
+          <span>by Savoury Spring Tu</span>
         </h1>
       </div>
     </>

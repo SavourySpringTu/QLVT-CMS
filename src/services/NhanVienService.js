@@ -4,8 +4,8 @@ const URL = "/nhanvien/";
 
 class NhanVienService {
 
-    getListNhanVien() {
-        return instance.get(URL + 'list');
+    getListNhanVien(data) {
+        return instance.post(URL + 'list',data);
     }
     loginNhanVien(data) {
         return instance.post(URL + 'login', data)

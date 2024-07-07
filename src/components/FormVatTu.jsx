@@ -13,6 +13,7 @@ const FormVatTu = ({ close, vt }) => {
   const [soluongton, setSoLuongTon] = useState("");
 
   const handleChangeMaVT = (event) => {
+    console.log(event.target.value);
     setMaVT(event.target.value);
   };
   const handleChangeTenVT = (event) => {
@@ -47,11 +48,9 @@ const FormVatTu = ({ close, vt }) => {
       setMaVT(vt.mavt);
       document.querySelector('input[name="inputTenVT"]').value = vt.tenvt;
       setTenVT(vt.tenvt);
-      document.querySelector('input[name="inputDonViTinh"]').value =
-        vt.donvitinh;
+      document.querySelector('input[name="inputDonViTinh"]').value = vt.donvitinh;
       setDonViTinh(vt.donvitinh);
-      document.querySelector('input[name="inputSoLuongTon"]').value =
-        vt.soluongton;
+      document.querySelector('input[name="inputSoLuongTon"]').value = vt.soluongton;
       setSoLuongTon(vt.soluongton);
     }
   }, []);
@@ -83,21 +82,11 @@ const FormVatTu = ({ close, vt }) => {
             <div className="formbold-input-flex">
               <div>
                 <label className="formbold-form-label">Mã VT</label>
-                <input
-                  type="text"
-                  name="inputMaVT"
-                  className="formbold-form-input"
-                  onChange={handleChangeMaVT}
-                />
+                <input type="text" name="inputMaVT" className="formbold-form-input" onChange={handleChangeMaVT} />
               </div>
               <div>
                 <label className="formbold-form-label"> Tên VT </label>
-                <input
-                  type="text"
-                  name="inputTenVT"
-                  className="formbold-form-input"
-                  onChange={handleChangeTenVT}
-                />
+                <input type="text" name="inputTenVT" className="formbold-form-input" onChange={handleChangeTenVT} />
               </div>
             </div>
 

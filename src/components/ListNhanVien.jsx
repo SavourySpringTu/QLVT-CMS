@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { fetchAllNhanVien } from "../redux/slices/nhanvienSlice";
+import { fetchNhanVienbyQuyenandChiNhanh } from "../redux/slices/nhanvienSlice";
+import { useCookies } from "react-cookie";
 import Popup from "reactjs-popup";
 import NhanVienService from "../services/NhanVienService.js";
 import ReactPaginate from "react-paginate";
 import FormNhanVien from "./FormNhanVien.jsx";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/listNhanVien.scss";
+import "../styles/list.scss";
 
 const ListNhanVien = () => {
   const dispatch = useDispatch();
   const listNhanVien = useSelector((state) => state.nhanvien.listNhanVien);
-  const [listNhanVienPage, setListNhanVienPage] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchAllNhanVien());
-  }, []);
+  const [cookies] = useCookies(["nhanvien"]);
+  const [listNhanVienPage, setListNhanVienPage] = useState([]);
 
   const getListNhanVienPage = async (page) => {
     console.log("list" + listNhanVien);
@@ -32,8 +31,12 @@ const ListNhanVien = () => {
     let nhanvien = {
       manv: event.target.value,
     };
+    let fetch = {
+      maquyen: cookies.nhanvien.vaiTroNV.maquyen,
+      macn: cookies.nhanvien.chiNhanhNV.macn,
+    };
     const response = await NhanVienService.deleteNhanVien(nhanvien);
-    dispatch(fetchAllNhanVien());
+    dispatch(fetchNhanVienbyQuyenandChiNhanh(fetch));
     toast.success("Xóa Nhân Viên Thành Công");
   }
 
@@ -41,37 +44,37 @@ const ListNhanVien = () => {
 
   return (
     <>
-      <div className="addAnimation">
-        <Popup
-          modal
-          trigger={
-            <div>
-              <Player
-                src="https://lottie.host/d9e3aee3-60f6-4156-8cfc-85ac413b500e/okqwVQmCwv.json"
-                loop
-                autoplay
-                style={{ height: "70px", width: "70px" }}
-              />
-            </div>
-          }
-        >
-          {(close) => (
-            <div>
-              <FormNhanVien close={close} />
-            </div>
-          )}
-        </Popup>
-      </div>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
+        <div
+          className="addAnimation"
+          style={cookies.nhanvien.vaiTroNV.maquyen == "Q01" ? { display: "none" } : { display: "block" }}
+        >
+          <Popup
+            modal
+            trigger={
+              <div>
+                <Player
+                  src="https://lottie.host/d9e3aee3-60f6-4156-8cfc-85ac413b500e/okqwVQmCwv.json"
+                  loop
+                  autoplay
+                  style={{ height: "70px", width: "70px" }}
+                />
+              </div>
+            }
+          >
+            {(close) => (
+              <div>
+                <FormNhanVien close={close} />
+              </div>
+            )}
+          </Popup>
+        </div>
         <table id="customers">
           <thead>
-            <tr>
+            <tr key="abv">
               <th>Mã NV</th>
               <th>Họ Tên</th>
               <th>Ngày Sinh</th>
@@ -117,11 +120,7 @@ const ListNhanVien = () => {
                       >
                         {(close) => (
                           <div className="popupDelete">
-                            <button
-                              className="btnXacNhanXoa"
-                              value={nv.manv}
-                              onClick={handleClickXoa.bind()}
-                            >
+                            <button className="btnXacNhanXoa" value={nv.manv} onClick={handleClickXoa.bind()}>
                               Xác Nhận
                             </button>
                           </div>
