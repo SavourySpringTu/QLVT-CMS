@@ -56,6 +56,7 @@ const FormCTDH = ({ close, ctdh }) => {
     }
   }, []);
   async function handleSubmit(event) {
+    event.preventDefault();
     if (verify() == true) {
       let data = {
         maddh: maddh,
@@ -63,7 +64,6 @@ const FormCTDH = ({ close, ctdh }) => {
         soluong: soluong,
         dongia: dongia,
       };
-      console.log(data);
       let fetch = {
         maquyen: cookies.nhanvien.vaiTroNV.maquyen,
         macn: cookies.nhanvien.chiNhanhNV.macn,
@@ -74,7 +74,6 @@ const FormCTDH = ({ close, ctdh }) => {
           toast.error("Thêm Thất Bại!");
         } else {
           dispatch(fetchCTDHbyQuyenandChiNhanh(fetch));
-          console.log();
           toast.success("Thêm Thành Công!");
         }
       } else {
@@ -85,7 +84,6 @@ const FormCTDH = ({ close, ctdh }) => {
           soluong: soluong.toString(),
           dongia: dongia.toString(),
         };
-        console.log(dataupdate);
         const response = await CTDHService.updateCTDH(dataupdate);
         if (response == 0) {
           toast.error("Cập Nhật Thất Bại!");

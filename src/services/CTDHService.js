@@ -12,6 +12,8 @@ class CTDHService {
     updateCTDH(data){
         return instance.put(URL + 'update',data)
     }
-    
+    deleteCTDH(data){
+        return instance.post(URL + 'delete',data)
+    }
 }
 export default new CTDHService();

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { store } from './redux/store.js'
+import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
 import Login from './views/Login';
 import Home from './views/Home'
@@ -9,8 +11,8 @@ import PhieuNhap from './views/PhieuNhap.jsx'
 import Kho from './views/Kho.jsx'
 import DatHang from './views/DatHang.jsx'
 import KhachHang from './views/KhachHang.jsx'
-import { store } from './redux/store.js'
-import { Provider } from 'react-redux'
+import PhieuXuat from './views/PhieuXuat.jsx'
+
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +28,7 @@ root.render(
           <Route path="/QLVT-CMS/dathang" element={<DatHang />} />
           <Route path="/QLVT-CMS/phieunhap" element={< PhieuNhap />} />
           <Route path="/QLVT-CMS/khachhang" element={<KhachHang />} />
+          <Route path="/QLVT-CMS/phieuxuat" element={<PhieuXuat />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import CTPNService from "../../services/CTPNService"
 
-export const fetchAllCTPN = createAsyncThunk(
-    'vattu/fetchAllCTPN',
-    async () => {
-        const response = await CTPNService.getListCTPN();
+export const fetchCTPNbyQuyenandChiNhanh = createAsyncThunk(
+    'chitietphieunhap/fetchCTPNbyQuyenandChiNhanh',
+    async (input) => {
+        const response = await CTPNService.getListCTPN(input);
         return response.data;
     }
 )
@@ -14,23 +14,23 @@ const initialState = {
     isError: false
 }
 export const ctpnSlice = createSlice({
-    name: 'ctpn',
+    name: 'chitietphieunhap',
     initialState,
     reducers: {
 
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllCTPN.pending, (state, action) => {
+            .addCase(fetchCTPNbyQuyenandChiNhanh.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllCTPN.fulfilled, (state, action) => {
+            .addCase(fetchCTPNbyQuyenandChiNhanh.fulfilled, (state, action) => {
                 state.listCTPN = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllCTPN.rejected, (state, action) => {
+            .addCase(fetchCTPNbyQuyenandChiNhanh.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })

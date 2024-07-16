@@ -4,8 +4,14 @@ import instance from './custom-axios';
 const URL = "/phieunhap/";
 
 class PhieuNhapService {
-    getListPhieuNhap() {
-        return instance.get(URL + 'list');
+    getListPhieuNhap(data) {
+        return instance.post(URL + 'list',data);
+    }
+    insertPhieuNhap(data){
+        return instance.post(URL +'insert',data)
+    }
+    updatePhieuNhap(data){
+        return instance.post(URL +'',data)
     }
     
 }

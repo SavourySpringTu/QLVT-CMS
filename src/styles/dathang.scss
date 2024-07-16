@@ -83,10 +83,10 @@
   
   // =============== SEARCH ===============
 
-  .inputSearch{
+  .inputSearchCT{
     position: absolute;
     top: 16%;
-    left: 79%;
+    left: 84.8%;
     width: 100px;
     box-sizing: border-box;
     border-radius: 4px;
@@ -94,19 +94,15 @@
     border-color: black;
     text-align: center;
   }
-  
-  .btnSearch{
+
+  .inputSearchDH{
     position: absolute;
     top: 16%;
-    left: 86%;
-    width: 55px;
-    background-color: #6a64f1;
+    left: 39.8%;
+    width: 100px;
+    box-sizing: border-box;
     border-radius: 4px;
-    border-color: white;
     border-width: 1px;
-    text-align: center; 
-  }
-  
-  .btnSearch:hover{
-    background-color: #ddd;
+    border-color: black;
+    text-align: center;
   }

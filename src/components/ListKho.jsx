@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchKhobyQuyenandChiNhanh } from "../redux/slices/khoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,6 +12,7 @@ import "../styles/list.scss";
 const ListKho = () => {
   const dispatch = useDispatch();
   const listKho = useSelector((state) => state.kho.listKho);
+  const [inputKho, setInputKho] = useState();
 
   useEffect(() => {
     dispatch(fetchKhobyQuyenandChiNhanh());
@@ -33,6 +34,7 @@ const ListKho = () => {
   }
   return (
     <>
+      <input type="text" className="inputSearchCT" onChange={(e) => setInputKho(e.target.value)}></input>
       <div className="addAnimation">
         <Popup
           modal
@@ -69,48 +71,52 @@ const ListKho = () => {
             </tr>
           </thead>
           <tbody>
-            {listKho.map((kho) => (
-              <Popup
-                trigger={
-                  <tr key={kho.makho}>
-                    <td>{kho.makho}</td>
-                    <td>{kho.tenkho}</td>
-                    <td>{kho.diachi}</td>
-                    <td>{kho.chinhanh}</td>
-                    <td className="table-Icon">
-                      <Popup
-                        trigger={
-                          <div>
-                            <Player
-                              src="https://lottie.host/be0667b2-da1b-42f0-a4e5-cfbae1112225/ZIARx3NoBt.json"
-                              className="player"
-                              loop
-                              autoplay
-                              style={{ height: "35px", width: "35px" }}
-                            />
-                          </div>
-                        }
-                        position="right"
-                      >
-                        {(close) => (
-                          <div className="popupDelete">
-                            <button className="btnXacNhanXoa" value={kho.makho} onClick={handleClickXoa.bind()}>
-                              Xác Nhận
-                            </button>
-                          </div>
-                        )}
-                      </Popup>
-                    </td>
-                  </tr>
-                }
-              >
-                {(close) => (
-                  <div>
-                    <FormKho kho={kho} close={close} />
-                  </div>
-                )}
-              </Popup>
-            ))}
+            {listKho
+              .filter((kho) => {
+                return inputKho == "" ? listKho : kho.makho.match(inputKho);
+              })
+              .map((kho) => (
+                <Popup
+                  trigger={
+                    <tr key={kho.makho}>
+                      <td>{kho.makho}</td>
+                      <td>{kho.tenkho}</td>
+                      <td>{kho.diachi}</td>
+                      <td>{kho.chinhanh}</td>
+                      <td className="table-Icon">
+                        <Popup
+                          trigger={
+                            <div>
+                              <Player
+                                src="https://lottie.host/be0667b2-da1b-42f0-a4e5-cfbae1112225/ZIARx3NoBt.json"
+                                className="player"
+                                loop
+                                autoplay
+                                style={{ height: "35px", width: "35px" }}
+                              />
+                            </div>
+                          }
+                          position="right"
+                        >
+                          {(close) => (
+                            <div className="popupDelete">
+                              <button className="btnXacNhanXoa" value={kho.makho} onClick={handleClickXoa.bind()}>
+                                Xác Nhận
+                              </button>
+                            </div>
+                          )}
+                        </Popup>
+                      </td>
+                    </tr>
+                  }
+                >
+                  {(close) => (
+                    <div>
+                      <FormKho kho={kho} close={close} />
+                    </div>
+                  )}
+                </Popup>
+              ))}
           </tbody>
         </table>
       </body>

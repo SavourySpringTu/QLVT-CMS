@@ -17,16 +17,21 @@ const FormDatHang = ({ close, dh }) => {
   const [nhacc, setNhaCC] = useState("");
   const [manv, setMaNV] = useState("");
   const [makho, setMaKho] = useState("");
+  const [fetch, setFetch] = useState();
 
   const handleChangeMaKho = (event) => {
     setMaKho(event.target.value);
   };
   const handleChangeNhaCC = (event) => {
-    console.log(manv);
     setNhaCC(event.target.value);
   };
 
   useEffect(() => {
+    let fetch = {
+      maquyen: cookies.nhanvien.vaiTroNV.maquyen,
+      macn: cookies.nhanvien.chiNhanhNV.macn,
+    };
+    setFetch(fetch);
     setMaKho(Object.values(listKhobyQuyenandChiNhanh)[0].makho);
     if (typeof dh === "undefined") {
       let today = format(new Date(), "yyyy-MM-dd");
@@ -51,7 +56,6 @@ const FormDatHang = ({ close, dh }) => {
 
   function verify() {
     if (nhacc.trim().length < 3) {
-      console.log(nhacc);
       toast.error("Nhà Cung Cấp Phải 3 Kí Tự!");
       return false;
     }
@@ -66,16 +70,16 @@ const FormDatHang = ({ close, dh }) => {
         manv: manv,
         makho: makho,
       };
-      const response = await DatHangService.insertDatHang(dathang);
-      if (response == 0) {
-        toast.error("Cập Nhật Thất Bại!");
+      if (typeof ctdh === "undefined") {
+        const response = await DatHangService.insertDatHang(dathang);
+        if (response == 0) {
+          toast.error("Thêm Thất Bại!");
+        } else {
+          dispatch(fetchDatHangbyQuyenandChiNhanh(fetch));
+          toast.success("Thêm Thành Công!");
+        }
       } else {
-        let fetch = {
-          maquyen: cookies.nhanvien.vaiTroNV.maquyen,
-          macn: cookies.nhanvien.chiNhanhNV.macn,
-        };
-        dispatch(fetchDatHangbyQuyenandChiNhanh(fetch));
-        toast.success("Cập Nhật Thành Công!");
+        const response = await DatHangService.insertDatHang(dathang);
       }
     }
   }

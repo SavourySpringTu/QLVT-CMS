@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PhieuNhapService from "../../services/PhieuNhapService.js"
 
-export const fetchAllPhieuNhap = createAsyncThunk(
-    'phieunhap/fetchAllPhieuNhap',
-    async () => {
-        const response = await PhieuNhapService.getListPhieuNhap();
+export const fetchPhieuNhapbyQuyenandChiNhanh = createAsyncThunk(
+    'phieunhap/fetchPhieuNhapbyQuyenandChiNhanh',
+    async (data) => {
+        const response = await PhieuNhapService.getListPhieuNhap(data);
         return response.data;
     }
 )
@@ -21,16 +21,16 @@ export const phieunhapSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllPhieuNhap.pending, (state, action) => {
+            .addCase(fetchPhieuNhapbyQuyenandChiNhanh.pending, (state, action) => {
                 state.isLoading = true;
                 state.isError = false;
             })
-            .addCase(fetchAllPhieuNhap.fulfilled, (state, action) => {
+            .addCase(fetchPhieuNhapbyQuyenandChiNhanh.fulfilled, (state, action) => {
                 state.listPhieuNhap = action.payload;
                 state.isLoading = false;
                 state.isError = false;
             })
-            .addCase(fetchAllPhieuNhap.rejected, (state, action) => {
+            .addCase(fetchPhieuNhapbyQuyenandChiNhanh.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
             })

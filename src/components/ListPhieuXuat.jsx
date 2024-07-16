@@ -1,31 +1,86 @@
 import React, { useState, useEffect } from "react";
-import { fetchPhieuNhapbyQuyenandChiNhanh } from "../redux/slices/phieunhapSlice.js";
-import { fetchCTPNbyQuyenandChiNhanh } from "../redux/slices/ctpnSlice.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Player } from "@lottiefiles/react-lottie-player";
-import FormPhieuNhap from "./FormPhieuNhap.jsx";
-import FormCTPN from "./FormCTPN.jsx";
+import { useDispatch } from "react-redux";
+import { fetchPhieuXuatbyQuyenandChiNhanh } from "../redux/slices/phieuxuatSlice.js";
+import { fetchCTPXbyQuyenandChiNhanh } from "../redux/slices/ctpxSlice.js";
+import { useCookies } from "react-cookie";
+import PhieuXuatService from "../services/PhieuXuatService.js";
 import Popup from "reactjs-popup";
+import FormPhieuXuat from "./FormPhieuXuat.jsx";
+import FormCTPX from "./FormCTPX.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/dathang.scss";
+import CTPXService from "../services/CTPXService.js";
 
-const ListPhieuNhap = () => {
+const ListPhieuXuat = () => {
   const dispatch = useDispatch();
-  const listPhieuNhap = useSelector((state) => state.phieunhap.listPhieuNhap);
-  const listCTPN = useSelector((state) => state.chitietphieunhap.listCTPN);
-  const [inputPhieuNhap, setInputPhieuNhap] = useState("");
-  const [inputCTPN, setInputCTPN] = useState("");
+  const listPhieuXuat = useSelector((state) => state.dathang.listPhieuXuat);
+  const listCTPX = useSelector((state) => state.chitietdathang.listCTPX);
 
-  useEffect(() => {}, []);
+  const [cookies] = useCookies(["nhanvien"]);
+  const [inputSearchCT, setInputSearchCT] = useState("");
+  const [inputSearchDH, setInputSearchDH] = useState("");
+  const [fetch, setFetch] = useState({});
 
-  async function handleClickXoa(event) {
-    event.preventDefault();
+  useEffect(() => {
+    console.log("px ne : " + listPhieuXuat);
+    setFetch({
+      maquyen: cookies.nhanvien.vaiTroNV.maquyen,
+      macn: cookies.nhanvien.chiNhanhNV.macn,
+    });
+  }, []);
+
+  function checkDeletePhieuXuat(madpx) {
+    for (let i = 0; i < listCTPX.length; i++) {
+      if (listCTPX[i].madpx == madpx) {
+        return false;
+      }
+    }
+    return true;
   }
+
+  async function handleClickXoaDH(event) {
+    event.preventDefault();
+    console.log("toi day");
+    if (checkDeletePhieuXuat(event.target.value) == true) {
+      let input = {
+        madpx: event.target.value,
+      };
+      const response = await PhieuXuatService.deletePhieuXuat(input);
+      if (response.data == 1) {
+        dispatch(fetchPhieuXuatbyQuyenandChiNhanh(fetch));
+        toast.success("Xóa Thành Công!");
+      } else {
+        toast.error("Không Thể Xóa!");
+      }
+    } else {
+      toast.error("Đã Có Chi Tiết!");
+    }
+  }
+
+  async function handleClickXoaCT(event, v1, v2) {
+    event.preventDefault();
+    console.log(v1, v2);
+    let input = {
+      mapx: v1.toString(),
+      mavt: v2,
+    };
+
+    const response = await CTPXService.deleteCTPX(input);
+    if (response.data == 1) {
+      dispatch(fetchCTPXbyQuyenandChiNhanh(fetch));
+      toast.success("Xóa Thành Công!");
+    } else {
+      toast.error("Không Thể Xóa!");
+    }
+  }
+
   return (
     <>
-      <input type="number" className="inputSearchDH" onChange={(e) => setInputPhieuNhap(e.target.value)}></input>
-      <input type="number" className="inputSearchCT" onChange={(e) => setInputCTPN(e.target.value)}></input>
+      <input type="number" className="inputSearchDH" onChange={(e) => setInputSearchDH(e.target.value)}></input>
+      <input type="number" className="inputSearchCT" onChange={(e) => setInputSearchCT(e.target.value)}></input>
       <div className="addAnimation">
         <Popup
           modal
@@ -42,7 +97,7 @@ const ListPhieuNhap = () => {
         >
           {(close) => (
             <div>
-              <FormPhieuNhap close={close} />
+              <FormPhieuXuat close={close} />
             </div>
           )}
         </Popup>
@@ -63,7 +118,7 @@ const ListPhieuNhap = () => {
         >
           {(close) => (
             <div>
-              <FormCTPN close={close} />
+              <FormCTPX close={close} />
             </div>
           )}
         </Popup>
@@ -75,29 +130,28 @@ const ListPhieuNhap = () => {
         <table id="table" className="dathang">
           <thead>
             <tr>
-              <th>Mã PN</th>
-              <th>Ngày Lập Phiếu</th>
               <th>Mã DDH</th>
+              <th>Ngày</th>
+              <th>Nhà CC</th>
               <th>Mã Kho</th>
               <th>Mã NV</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {listPhieuNhap
-              .filter((pn) => {
-                return inputPhieuNhap == "" ? listPhieuNhap : pn.mapn == inputPhieuNhap;
+            {listPhieuXuat
+              .filter((px) => {
+                return inputSearchDH === "" ? listPhieuXuat : px.mapx == inputSearchDH;
               })
-              .map((pn) => (
+              .map((px) => (
                 <Popup
                   trigger={
-                    <tr key={pn.mapn}>
-                      <td>{pn.mapn}</td>
-                      <td>{pn.ngay}</td>
-                      <td>{pn.maddh}</td>
-                      <td>{pn.makho}</td>
-                      <td>{pn.manv}</td>
-
+                    <tr key={px.mapx}>
+                      <td>{px.mapx}</td>
+                      <td>{px.ngay}</td>
+                      <td>{px.nhacc}</td>
+                      <td>{px.makho}</td>
+                      <td>{px.manv}</td>
                       <td className="table-Icon">
                         <Popup
                           trigger={
@@ -115,7 +169,7 @@ const ListPhieuNhap = () => {
                         >
                           {(close) => (
                             <div className="popupDelete">
-                              <button className="btnXacNhanXoa" value={pn.mapn} onClick={handleClickXoa.bind()}>
+                              <button className="btnXacNhanXoa" value={px.mapx} onClick={(e) => handleClickXoaDH(e)}>
                                 Xác Nhận
                               </button>
                             </div>
@@ -127,17 +181,17 @@ const ListPhieuNhap = () => {
                 >
                   {(close) => (
                     <div>
-                      <FormPhieuNhap pn={pn} close={close} />
+                      <FormPhieuXuat px={px} close={close} />
                     </div>
                   )}
                 </Popup>
               ))}
           </tbody>
         </table>
-        <table id="table" className="ctdh">
+        <table id="table" className="ctpx">
           <thead>
             <tr>
-              <th>Mã PN</th>
+              <th>Mã DDH</th>
               <th>Mã VT</th>
               <th>Số Lượng</th>
               <th>Đơn Giá</th>
@@ -145,18 +199,18 @@ const ListPhieuNhap = () => {
             </tr>
           </thead>
           <tbody>
-            {listCTPN
-              .filter((ctpn) => {
-                return inputCTPN == "" ? listCTPN : ctpn.mapn == inputCTPN;
+            {listCTPX
+              .filter((ctpx) => {
+                return inputSearchCT === "" ? listCTPX : ctpx.mapx == inputSearchCT;
               })
-              .map((ctpn) => (
+              .map((ctpx) => (
                 <Popup
                   trigger={
-                    <tr key={ctpn.mapn}>
-                      <td>{ctpn.mapn}</td>
-                      <td>{ctpn.mavt}</td>
-                      <td>{ctpn.soluong}</td>
-                      <td>{ctpn.dongia}</td>
+                    <tr key={(ctpx.mapn, ctpx.mavt)}>
+                      <td>{ctpx.mapx}</td>
+                      <td>{ctpx.mavt}</td>
+                      <td>{ctpx.soluong}</td>
+                      <td>{ctpx.dongia}</td>
 
                       <td className="table-Icon">
                         <Popup
@@ -175,7 +229,11 @@ const ListPhieuNhap = () => {
                         >
                           {(close) => (
                             <div className="popupDelete">
-                              <button className="btnXacNhanXoa" value={ctpn.mapn} onClick={handleClickXoa.bind()}>
+                              <button
+                                className="btnXacNhanXoa"
+                                value={(ctpx.mapx, ctpx.mavt)}
+                                onClick={(e) => handleClickXoaCT(e, ctpx.mapx, ctpx.mavt)}
+                              >
                                 Xác Nhận
                               </button>
                             </div>
@@ -187,7 +245,7 @@ const ListPhieuNhap = () => {
                 >
                   {(close) => (
                     <div>
-                      <FormCTPN ctpn={ctpn} close={close} />
+                      <FormCTPX ctpx={ctpx} close={close} />
                     </div>
                   )}
                 </Popup>
@@ -199,4 +257,4 @@ const ListPhieuNhap = () => {
     </>
   );
 };
-export default ListPhieuNhap;
+export default ListPhieuXuat;

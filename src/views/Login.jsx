@@ -8,6 +8,10 @@ import { fetchNhanVienbyQuyenandChiNhanh } from "../redux/slices/nhanvienSlice";
 import { fetchAllVatTu } from "../redux/slices/vattuSlice";
 import { fetchDatHangbyQuyenandChiNhanh } from "../redux/slices/dathangSlice.js";
 import { fetchCTDHbyQuyenandChiNhanh } from "../redux/slices/ctdhSlice.js";
+import { fetchPhieuNhapbyQuyenandChiNhanh } from "../redux/slices/phieunhapSlice.js";
+import { fetchCTPNbyQuyenandChiNhanh } from "../redux/slices/ctpnSlice.js";
+import { fetchCTPXbyQuyenandChiNhanh } from "../redux/slices/ctpxSlice.js";
+import { fetchPhieuXuatbyQuyenandChiNhanh } from "../redux/slices/phieuxuatSlice.js";
 import NhanVienService from "../services/NhanVienService";
 import Title from "../components/Title";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,15 +55,19 @@ const Login = (props) => {
       nhanvien.hoten = response.data.hoten;
       nhanvien.vaiTroNV.maquyen = response.data.vaiTroNV.maquyen;
       // ========================= LOAD STATE REDUX ======================
-      let data = {
+      let fetch = {
         maquyen: nhanvien.vaiTroNV.maquyen,
         macn: nhanvien.chiNhanhNV.macn,
       };
-      dispatch(fetchDatHangbyQuyenandChiNhanh(data));
-      dispatch(fetchNhanVienbyQuyenandChiNhanh(data));
-      dispatch(fetchCTDHbyQuyenandChiNhanh(data));
+      dispatch(fetchDatHangbyQuyenandChiNhanh(fetch));
+      dispatch(fetchNhanVienbyQuyenandChiNhanh(fetch));
+      dispatch(fetchCTDHbyQuyenandChiNhanh(fetch));
+      dispatch(fetchCTPNbyQuyenandChiNhanh(fetch));
+      dispatch(fetchCTPXbyQuyenandChiNhanh(fetch));
+      dispatch(fetchPhieuXuatbyQuyenandChiNhanh(fetch));
+      dispatch(fetchPhieuNhapbyQuyenandChiNhanh(fetch));
+      dispatch(fetchKhobyQuyenandChiNhanh(fetch));
       dispatch(fetchAllVatTu());
-      dispatch(fetchKhobyQuyenandChiNhanh(data));
       // =================================================================
       setCookie("nhanvien", nhanvien, { path: "/", maxAge: 3600 });
       navigate("/QLVT-CMS/trangchu");

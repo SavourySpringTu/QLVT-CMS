@@ -60,19 +60,32 @@ const FormKho = ({ close, kho }) => {
     event.preventDefault();
     if (verify() == true) {
       console.log(makho);
-      let kho = {
+      let input = {
         makho: makho,
         tenkho: tenkho,
         diachi: diachi,
-        cn: cn,
+        macn: cn,
       };
-      console.log(kho);
-      const response = await KhoService.saveKho(kho);
-      if (response == 0) {
-        toast.error("Cập Nhật Thất Bại!");
+      let fetch = {
+        maquyen: cookies.nhanvien.vaiTroNV.maquyen,
+        macn: cookies.nhanvien.chiNhanhNV.macn,
+      };
+      if (typeof kho === "undefined") {
+        const response = await KhoService.insertKho(input);
+        if (response.data == 0) {
+          toast.error("Thêm Thất Bại!");
+        } else {
+          dispatch(fetchKhobyQuyenandChiNhanh(fetch));
+          toast.success("Thêm Thành Công!");
+        }
       } else {
-        dispatch(fetchKhobyQuyenandChiNhanh());
-        toast.success("Cập Nhật Thành Công!");
+        const response = await KhoService.updateKho(input);
+        if (response.data == 0) {
+          toast.error("Cập Nhật Thất Bại!");
+        } else {
+          dispatch(fetchKhobyQuyenandChiNhanh(fetch));
+          toast.success("Cập Nhật Thành Công!");
+        }
       }
     }
   }
@@ -84,7 +97,13 @@ const FormKho = ({ close, kho }) => {
             <div className="formbold-input-flex">
               <div>
                 <label className="formbold-form-label">Mã Kho</label>
-                <input type="text" name="inputMaKho" className="formbold-form-input" onChange={handleChangeMaKho} />
+                <input
+                  type="text"
+                  name="inputMaKho"
+                  className="formbold-form-input"
+                  onChange={handleChangeMaKho}
+                  readOnly={typeof kho === "undefined" ? false : true}
+                />
               </div>
               <div>
                 <label className="formbold-form-label"> Tên Kho </label>

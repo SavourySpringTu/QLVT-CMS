@@ -7,6 +7,8 @@ import dathangReducer from './slices/dathangSlice.js'
 import khoReducer from './slices/khoSlice.js'
 import chitietdathangReducer from './slices/ctdhSlice.js'
 import khachhangReducer from './slices/khachhangSlice.js'
+import phieuxuatReducer from './slices/phieuxuatSlice.js'
+import chitietphieuxuatReducer from './slices/ctpxSlice.js'
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +19,9 @@ export const store = configureStore({
         kho: khoReducer,
         chitietdathang: chitietdathangReducer,
         dathang: dathangReducer,
-        khachhang: khachhangReducer
+        khachhang: khachhangReducer,
+        phieunhap: phieunhapReducer,
+        phieuxuat: phieuxuatReducer,
+        chitietphieuxuat: chitietphieuxuatReducer
     },
 })
